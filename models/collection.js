@@ -12,7 +12,3 @@ const CollectionSchema = new mongoose.Schema(
 
 mongoose.models = {}
 export default mongoose.model("Collection", CollectionSchema);
-
-
-
-

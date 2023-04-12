@@ -6,13 +6,13 @@ import Link from "next/link";
 function App() {
   const router = useRouter();
   const [getProducts, setGetProducts] = useState(null);
-  const [checkBox, setCheckBox] = useState(null);
+  const [checkBox, setCheckBox] = useState([]);
   const [checked, setChecked] = useState(false);
 
-  const getProduct = () => {
-    return fetch("http://localhost:3030/getproducts")
-      .then((response) => response.json())
-      .then((data) => setGetProducts(data.products));
+  const getProduct = async () => {
+    const response = await fetch("http://localhost:3030/getproducts");
+    const data = await response.json();
+    return setGetProducts(data.products);
   };
 
   useEffect(() => {
@@ -24,31 +24,39 @@ function App() {
     router.push("/discount_page");
   };
 
-  console.log("getProducts",getProducts);
+  console.log("getProducts", getProducts);
 
   const handleChange = (id) => {
     console.log("CHECKDED", id);
-    setCheckBox(id)
+
+    if (checkBox.includes(id)) {
+      const index = checkBox.indexOf(id);
+      if (index > -1) {
+        checkBox.splice(index, 1);
+      }
+    } else {
+      setCheckBox([...checkBox, id]);
+    }
   };
 
   const handleCollection = () => {
     console.log("CHECKDED");
     router.push({
       pathname: "/collection_page",
-      query: checkBox
+      query: checkBox,
     });
   };
 
-  console.log("CheckBox",checkBox)
+  console.log("CheckBox", checkBox);
 
   return (
     <div className="App">
       <h1>Product List</h1>
-      <div style={{height: "500px", overflow:"auto"}}>
+      <div style={{ height: "500px", overflow: "auto" }}>
         <table className="table">
           <thead>
             <tr>
-              <th ></th>
+              <th></th>
               <th>Product Name</th>
               <th>Description</th>
               <th>Price</th>
@@ -61,17 +69,12 @@ function App() {
               getProducts.length > 0 &&
               getProducts.map((products, index) => (
                 <tr key={index}>
-                  {!products.images.src ? (
-                    <th>
-                      <input
-                        type="checkbox"
-                        onChange={() => handleChange(products.id)}
-                      />
-                    </th>
-                  ) : (
-                    <th>Image not Found</th>
-                  )}
-
+                  <th>
+                    <input
+                      type="checkbox"
+                      onChange={() => handleChange(products.id)}
+                    />
+                  </th>
                   <th>{products.title}</th>
                   {!products.body_html ? (
                     <th>Null</th>
@@ -94,8 +97,10 @@ function App() {
               ))}
           </tbody>
         </table>
-      </div><br/><br/>
-      <div style={{textAlign:"center"}}>
+      </div>
+      <br />
+      <br />
+      <div style={{ textAlign: "center" }}>
         <button onClick={handleCollection}>Add to Collection</button>
       </div>
     </div>
