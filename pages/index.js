@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Collection from "./collection_page";
 
 function App() {
   const router = useRouter();
-  const [getProducts, setGetProducts] = useState(null);
+  const [getProducts, setGetProducts] = useState([]);
   const [checkBox, setCheckBox] = useState([]);
   const [checked, setChecked] = useState(false);
+  const [blankArray, setBlankArray] = useState([]);
 
   const getProduct = async () => {
     const response = await fetch("http://localhost:3030/getproducts");
@@ -18,6 +20,14 @@ function App() {
   useEffect(() => {
     getProduct();
   }, []);
+
+  
+
+//   useEffect(() => {
+//     let abc = getProducts.filter((data) => {
+//     data.id === 
+//   })
+// },[])
 
   const handleDiscountButton = () => {
     console.log("Discount Button Clicked");
@@ -39,19 +49,22 @@ function App() {
     }
   };
 
-  const handleCollection = () => {
-    console.log("CHECKDED");
-    router.push({
-      pathname: "/collection_page",
-      query: checkBox,
-    });
-  };
+  // const handleCollection = () => {
+  //   console.log("CHECKDED");
+  //   router.push({
+  //     pathname: "/collection_page",
+  //     query: checkBox,
+  //   });
+  // };
 
   console.log("CheckBox", checkBox);
 
   return (
     <div className="App">
-      <h1>Product List</h1>
+      {
+        checked ? <Collection checkBox={checkBox}/> : 
+
+      <><h1>Product List</h1>
       <div style={{ height: "500px", overflow: "auto" }}>
         <table className="table">
           <thead>
@@ -97,12 +110,16 @@ function App() {
               ))}
           </tbody>
         </table>
-      </div>
+      </div></>}
       <br />
       <br />
-      <div style={{ textAlign: "center" }}>
-        <button onClick={handleCollection}>Add to Collection</button>
+      {checked ?  <div style={{ textAlign: "center" }}>
+        <button onClick={()=>{setChecked(false)}}>Back to Products</button>
+      </div>:<div style={{ textAlign: "center" }}>
+        <button onClick={()=>{setChecked(true)}}>Add to Collection</button>
       </div>
+      }
+      
     </div>
   );
 }

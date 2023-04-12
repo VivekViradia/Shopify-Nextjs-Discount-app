@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const Collection = ({ searchParams }) => {
+const Collection = ({ checkBox }) => {
   const router = useRouter();
   const routerData = router.query;
   const data = Object.values(routerData)
@@ -30,7 +30,7 @@ const Collection = ({ searchParams }) => {
   // const filterProductData = !productData && productData.filter(item => data.includes(item.id))
   // console.log("filterProductData",filterProductData)
 
-  console.log("Collection Page getProduct",productData)
+  console.log("Collection Page getProduct",checkBox)
   return (
     <div>
       <div>
@@ -68,9 +68,6 @@ const Collection = ({ searchParams }) => {
       <div>
         <p>Create new Collection</p>
         <input type="string" />
-      </div>
-      <div>
-        <button onClick={handleDiscount}>Add Discount</button>
       </div>
     </div>
   );
