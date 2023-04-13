@@ -9,35 +9,38 @@ function App() {
   const [getProducts, setGetProducts] = useState([]);
   const [checkBox, setCheckBox] = useState([]);
   const [checked, setChecked] = useState(false);
-  const [blankArray, setBlankArray] = useState([]);
+  const [filterProducts, setFilterProducts] = useState([]);
 
   const getProduct = async () => {
     const response = await fetch("http://localhost:3030/getproducts");
     const data = await response.json();
     return setGetProducts(data.products);
   };
-
+  
   useEffect(() => {
     getProduct();
   }, []);
 
+  useEffect(() => {
+    const filterProductData = checkBox.filter((data) => {
+      return getProducts.find((item) => {
+        console.log("item",item)
+        return item.id === data
+      })
+    })
+    setFilterProducts(filterProductData)
+},[])
+
+  console.log("CheckBox", checkBox)
+  console.log("filterProducts", filterProducts)
   
-
-//   useEffect(() => {
-//     let abc = getProducts.filter((data) => {
-//     data.id === 
-//   })
-// },[])
-
   const handleDiscountButton = () => {
-    console.log("Discount Button Clicked");
     router.push("/discount_page");
   };
 
-  console.log("getProducts", getProducts);
+  
 
   const handleChange = (id) => {
-    console.log("CHECKDED", id);
 
     if (checkBox.includes(id)) {
       const index = checkBox.indexOf(id);
@@ -48,16 +51,14 @@ function App() {
       setCheckBox([...checkBox, id]);
     }
   };
-
   // const handleCollection = () => {
-  //   console.log("CHECKDED");
   //   router.push({
   //     pathname: "/collection_page",
   //     query: checkBox,
   //   });
   // };
 
-  console.log("CheckBox", checkBox);
+ 
 
   return (
     <div className="App">

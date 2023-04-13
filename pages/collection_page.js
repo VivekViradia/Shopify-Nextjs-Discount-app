@@ -17,20 +17,12 @@ const Collection = ({ checkBox }) => {
   const getProduct = async() => {
     const response = await fetch("http://localhost:3030/getproducts");
     const responseData = await response.json()
-    // const filteredProductData = responseData.products.filter(item => responseData.includes(item.id))
     setProductData(responseData.products)
-    // setProductDatas(filteredProductData)
 }
-
   useEffect(() => {
     getProduct()
   },[])
 
-
-  // const filterProductData = !productData && productData.filter(item => data.includes(item.id))
-  // console.log("filterProductData",filterProductData)
-
-  console.log("Collection Page getProduct",checkBox)
   return (
     <div>
       <div>
