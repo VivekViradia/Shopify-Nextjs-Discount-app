@@ -79,7 +79,7 @@ const Discount = () => {
           <br />
           <br />
           <input type="submit" />
-        </form>
+        </form><br/>
       </div>
     </React.Fragment>
   );

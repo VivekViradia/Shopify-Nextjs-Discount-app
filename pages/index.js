@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { useRouter } from "next/router";
-import Collection from "./collection_page";
+import Collection from "./collection";
+import Image from "next/image";
 
 function App() {
   const router = useRouter();
@@ -19,6 +20,7 @@ function App() {
     getProduct();
   }, []);
 
+  console.log("getProducts", getProducts);
   const filterProductData = getProducts.filter((item) =>
     checkBox.find((abc) => item.id == abc)
   );
@@ -45,16 +47,18 @@ function App() {
       ) : (
         <>
           <h1>Product List</h1>
-          <div style={{ height: "500px", overflow: "auto" }}>
+          <div style={{ height: "700px", overflow: "auto" }}>
             <table className="table">
               <thead>
                 <tr>
+                  <th></th>
                   <th></th>
                   <th>Product Name</th>
                   <th>Description</th>
                   <th>Price</th>
                   <th>Vendor</th>
                   <th>Created Date</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -68,6 +72,25 @@ function App() {
                           onChange={() => handleChange(products.id)}
                         />
                       </th>
+                      {products?.image && products?.image?.src ? (
+                        <th>
+                          <img
+                            src={products.image.src}
+                            alt="Product Image"
+                            width={80}
+                            height={80}
+                          />
+                        </th>
+                      ) : (
+                        <th>
+                          <img
+                            src="/No Image.jpg"
+                            alt="Product Image"
+                            width={80}
+                            height={80}
+                          />
+                        </th>
+                      )}
                       <th>{products.title}</th>
                       {!products.body_html ? (
                         <th>Null</th>
@@ -82,7 +105,8 @@ function App() {
                         ))}
 
                       <th>{products.vendor}</th>
-                      <th>{products.created_at}</th>
+                      <th>{products.created_at.slice(0, 10)}</th>
+                      <th>{products.status}</th>
                       <th>
                         <button onClick={handleDiscountButton}>
                           Add Discount
