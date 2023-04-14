@@ -13,7 +13,7 @@ const Collection = ({ filterProductData }) => {
   const handleCollectionCreate = (event) => {
     console.log("handleCollectionCreate");
     console.log("Collection Name", collectionName);
-    console.log("Collection Products",filterProductData)
+    console.log("Collection Product",filterProductData)
 
   };
   console.log("collectionName", collectionName);
@@ -40,12 +40,12 @@ const Collection = ({ filterProductData }) => {
         <table className="table">
           <thead>
             <tr>
+              <th></th>
               <th>Product Name</th>
               <th>Description</th>
               <th>Price</th>
               <th>Vendor</th>
               <th>Created Date</th>
-              <th>Collection Name</th>
             </tr>
           </thead>
           <tbody>
@@ -53,6 +53,25 @@ const Collection = ({ filterProductData }) => {
               filterProductData.length > 0 &&
               filterProductData.map((product, index) => (
                 <tr key={index}>
+                  {product?.image && product?.image?.src ? (
+                        <th>
+                          <img
+                            src={product.image.src}
+                            alt="Product Image"
+                            width={80}
+                            height={80}
+                          />
+                        </th>
+                      ) : (
+                        <th>
+                          <img
+                            src="/No Image.jpg"
+                            alt="Product Image"
+                            width={80}
+                            height={80}
+                          />
+                        </th>
+                      )}
                   <th>{product.title}</th>
                   {!product.body_html ? (
                     <th>Null</th>
