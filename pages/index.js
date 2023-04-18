@@ -26,7 +26,7 @@ function App() {
   );
 
   const handleDiscountButton = () => {
-    router.push("/discount_page");
+    router.push("/discount");
   };
 
   const handleChange = (id) => {
@@ -77,8 +77,8 @@ function App() {
                           <img
                             src={products.image.src}
                             alt="Product Image"
-                            width={80}
-                            height={80}
+                            width={60}
+                            height={60}
                           />
                         </th>
                       ) : (
@@ -86,8 +86,8 @@ function App() {
                           <img
                             src="/No Image.jpg"
                             alt="Product Image"
-                            width={80}
-                            height={80}
+                            width={60}
+                            height={60}
                           />
                         </th>
                       )}

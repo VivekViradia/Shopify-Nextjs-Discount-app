@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "@/styles/home.module.css";
 
 const Discount = () => {
   // const handleAddDiscount = () => {
   // console.log("Discount Added")
   // }
+  const [discountCode, setDiscountCode] = useState();
+  const [discountPercentage, setDiscountPercentage] = useState();
 
   const handleAddDiscount = () => {
     console.log("handleAddDiscount");
   };
 
-  const handleDiscountCode = () => {
-    console.log("HandleDiscountCode");
+  const handleDiscountCode = (e) => {
   };
-  const handleDiscountPercentage = () => {
+
+  console.log("discountCode", discountCode);
+
+  const handleDiscountPercentage = (e) => {
     console.log("handleDiscountPercentage");
   };
 
@@ -27,9 +31,10 @@ const Discount = () => {
             <br />
             <input
               type="text"
-              name=" Discount Code"
-              value=""
-              onChange={handleDiscountCode}
+              name=" discountCode"
+              onChange={(e) => {
+                setDiscountCode(e.target.value);
+              }}
             />
           </label>
           <br />
@@ -38,10 +43,11 @@ const Discount = () => {
             Discount Percentage
             <br />
             <input
-              type="text"
-              name="Discount Percentage"
-              value=""
-              onChange={handleDiscountPercentage}
+              type="number"
+              name="Discount_Percentage"
+              onChange={(e) => {
+                setDiscountPercentage(e.target.value);
+              }}
             />
           </label>
           <table className={styles.table}>
@@ -79,7 +85,8 @@ const Discount = () => {
           <br />
           <br />
           <input type="submit" />
-        </form><br/>
+        </form>
+        <br />
       </div>
     </React.Fragment>
   );

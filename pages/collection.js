@@ -4,24 +4,23 @@ import { useState } from "react";
 const Collection = ({ filterProductData }) => {
   const router = useRouter();
   const [collectionName, setCollectionName] = useState("");
+  const [productName, setProductName] = useState();
+  const [productDescription, setProductDescription] = useState();
+  const [productPrice, setProductPrice] = useState();
+  const [productVendor, setProductVendor] = useState();
 
   const handleDiscount = () => {
     console.log("Discount /Collections");
-    router.push("/discount_page");
+    router.push("/discount");
   };
 
-  const handleCollectionCreate = (event) => {
-    console.log("handleCollectionCreate");
+  const handleCollectionCreate = () => {
     console.log("Collection Name", collectionName);
     console.log("Collection Product",filterProductData)
 
   };
   console.log("collectionName", collectionName);
   
-  const handleCollectionName = () => {
-    console.log("handleCollectionName");
-  };
-
   return (
     <div>
       <h4>Collection page</h4>
@@ -58,8 +57,8 @@ const Collection = ({ filterProductData }) => {
                           <img
                             src={product.image.src}
                             alt="Product Image"
-                            width={80}
-                            height={80}
+                            width={60}
+                            height={60}
                           />
                         </th>
                       ) : (
@@ -67,12 +66,14 @@ const Collection = ({ filterProductData }) => {
                           <img
                             src="/No Image.jpg"
                             alt="Product Image"
-                            width={80}
-                            height={80}
+                            width={60}
+                            height={60}
                           />
                         </th>
-                      )}
+                  )
+                  }
                   <th>{product.title}</th>
+                
                   {!product.body_html ? (
                     <th>Null</th>
                   ) : (
@@ -87,7 +88,6 @@ const Collection = ({ filterProductData }) => {
 
                   <th>{product.vendor}</th>
                   <th>{product.created_at.slice(0, 10)}</th>
-                  <th>{collectionName}</th>
                 </tr>
               ))}
           </tbody>

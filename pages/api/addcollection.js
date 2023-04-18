@@ -6,7 +6,8 @@ const handler = async (req, res) => {
         for (let i = 0; i < req.body.length; i++){
             
             let newCollection = new Collection({
-                collectionName: req.body[i].collectionName
+                collectionName: req.body[i].collectionName,
+                collectionProducts: req.body[i].collectionProducts
             })
             await newCollection.save()
         }
