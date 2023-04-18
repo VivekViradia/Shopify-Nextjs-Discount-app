@@ -14,4 +14,6 @@ const CollectionSchema = new mongoose.Schema(
 );
 
 mongoose.models = {}
-export default mongoose.model("Collection", CollectionSchema);
+const Collections = mongoose.model("Collection", CollectionSchema)
+
+module.exports = Collections

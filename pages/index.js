@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { useRouter } from "next/router";
 import Collection from "./collection";
-import Image from "next/image";
 
 function App() {
   const router = useRouter();
@@ -10,14 +9,14 @@ function App() {
   const [checkBox, setCheckBox] = useState([]);
   const [checked, setChecked] = useState(false);
 
-  const getProduct = async () => {
-    const response = await fetch("http://localhost:3030/getproducts");
-    const data = await response.json();
-    return setGetProducts(data.products);
-  };
-
   useEffect(() => {
-    getProduct();
+    async function fetchData() {
+      const res = await fetch('/api/shopify');
+      const data = await res.json();
+      setGetProducts(data);
+    }
+
+    fetchData();
   }, []);
 
   console.log("getProducts", getProducts);
