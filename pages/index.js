@@ -28,7 +28,6 @@ function App() {
   const handleDiscountButton = () => {
     router.push("/discount");
   };
-console.log("checkBox",checkBox)
   const handleChange = (id) => {
     if (checkBox.includes(id)) {
       const index = checkBox.indexOf(id);
@@ -47,7 +46,7 @@ const checkboxStyle = {
   return (
     <div className="App">
       {checked ? (
-        <Collection filterProductData={filterProductData} checkBox={checkBox} />
+        <Collection filterProductData={filterProductData} products={checkBox} />
       ) : (
           <>
             <Head>

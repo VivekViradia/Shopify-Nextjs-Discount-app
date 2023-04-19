@@ -1,25 +1,33 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-const Collection = ({ filterProductData, checkBox }) => {
+const Collection = ({ filterProductData, products }) => {
   const router = useRouter();
   const [collectionName, setCollectionName] = useState("");
-  const [productName, setProductName] = useState();
-  const [productDescription, setProductDescription] = useState();
-  const [productPrice, setProductPrice] = useState();
-  const [productVendor, setProductVendor] = useState();
-
   const handleDiscount = () => {
-    console.log("Discount /Collections");
     router.push("/discount");
   };
 
   const handleCollectionCreate = () => {
     console.log("Collection Name", collectionName);
-    console.log("Collection ProductID", checkBox)
-
+    console.log("Collection ProductID", products)
+    // console.log(name,email,phone,address)
+    let details = { collectionName, products };
+    console.log("details",details);
+    fetch("http://localhost:3000/api/addcollection", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(details),
+    }).then((response) => {
+      console.log("Response", response);
+      response.json().then((result) => {
+        console.log("Result", result);
+      });
+    });
   };
-  console.log("collectionName", collectionName);
 
   return (
     <div>
@@ -92,9 +100,9 @@ const Collection = ({ filterProductData, checkBox }) => {
               ))}
           </tbody>
         </table>
-        <button onClick={handleCollectionCreate}> Add to Collection</button>
+        <button type="button" onClick={handleCollectionCreate}> Add to Collection</button>
         <br />
-        <br /><button onClick={handleDiscount}> Add to Discount</button>
+        <br /><button type="button" onClick={handleDiscount}> Add to Discount</button>
       </div>
     </div>
   );
