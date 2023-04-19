@@ -4,16 +4,17 @@ const CollectionSchema = new mongoose.Schema(
   {
     collectionName: {
       type: String,
-      required: [true,"Must give name to a Collection"],
+      required: [true, "Must give name to a Collection"],
     },
     products: {
-      type:String
-    }
+      type: [String],
+      required: [true, "Must provide IDs of Products"],
+    },
   },
   { timestamps: true }
 );
 
-mongoose.models = {}
-const Collections = mongoose.model("Collection", CollectionSchema)
+mongoose.models = {};
+const Collections = mongoose.model("Collection", CollectionSchema);
 
-module.exports = Collections
+module.exports = Collections;

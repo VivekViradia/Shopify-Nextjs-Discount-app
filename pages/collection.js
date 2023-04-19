@@ -11,7 +11,7 @@ const Collection = ({ filterProductData }) => {
 
   const handleDiscount = () => {
     console.log("Discount /Collections");
-    router.push("/discount");
+    router.push("/discount_page");
   };
 
   const handleCollectionCreate = () => {

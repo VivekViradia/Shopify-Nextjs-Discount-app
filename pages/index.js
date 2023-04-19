@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { useRouter } from "next/router";
 import Collection from "./collection";
+import Head from "next/head";
 
 function App() {
   const router = useRouter();
@@ -27,7 +28,7 @@ function App() {
   const handleDiscountButton = () => {
     router.push("/discount");
   };
-
+console.log("checkBox",checkBox)
   const handleChange = (id) => {
     if (checkBox.includes(id)) {
       const index = checkBox.indexOf(id);
@@ -44,7 +45,10 @@ function App() {
       {checked ? (
         <Collection filterProductData={filterProductData} />
       ) : (
-        <>
+          <>
+            <Head>
+              <link rel="icon" type="image/png" href="/icon2.png" />
+            </Head>
           <h1>Product List</h1>
           <div style={{ height: "700px", overflow: "auto" }}>
             <table className="table">
