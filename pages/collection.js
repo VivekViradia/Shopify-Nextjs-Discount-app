@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-const Collection = ({ filterProductData }) => {
+const Collection = ({ filterProductData, checkBox }) => {
   const router = useRouter();
   const [collectionName, setCollectionName] = useState("");
   const [productName, setProductName] = useState();
@@ -11,16 +11,16 @@ const Collection = ({ filterProductData }) => {
 
   const handleDiscount = () => {
     console.log("Discount /Collections");
-    router.push("/discount_page");
+    router.push("/discount");
   };
 
   const handleCollectionCreate = () => {
     console.log("Collection Name", collectionName);
-    console.log("Collection Product",filterProductData)
+    console.log("Collection ProductID", checkBox)
 
   };
   console.log("collectionName", collectionName);
-  
+
   return (
     <div>
       <h4>Collection page</h4>
@@ -32,11 +32,11 @@ const Collection = ({ filterProductData }) => {
             name="Collection Name"
             value={collectionName}
             onChange={(e) => { setCollectionName(e.target.value) }}
-          />
-          <p>Your Collection Name: {collectionName}</p>
+          /><br/><br/>
+          <h4>Your Collection Name: {collectionName}</h4>
         </div>
-        <br />
-        <table className="table">
+       
+        <table className="table" style={{border: "1px solid black"}}>
           <thead>
             <tr>
               <th></th>

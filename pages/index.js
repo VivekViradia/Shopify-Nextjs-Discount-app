@@ -39,19 +39,24 @@ console.log("checkBox",checkBox)
       setCheckBox([...checkBox, id]);
     }
   };
+const checkboxStyle = {
+    width: '15px',
+    height: '15px',
+  };
 
   return (
     <div className="App">
       {checked ? (
-        <Collection filterProductData={filterProductData} />
+        <Collection filterProductData={filterProductData} checkBox={checkBox} />
       ) : (
           <>
             <Head>
               <link rel="icon" type="image/png" href="/icon2.png" />
+              
             </Head>
           <h1>Product List</h1>
-          <div style={{ height: "700px", overflow: "auto" }}>
-            <table className="table">
+          <div style={{ height: "500px", overflow: "auto" }}>
+          <table className="table" style={{border: "1px solid black"}}>
               <thead>
                 <tr>
                   <th></th>
@@ -69,8 +74,9 @@ console.log("checkBox",checkBox)
                   getProducts.length > 0 &&
                   getProducts.map((products, index) => (
                     <tr key={index}>
-                      <th>
+                       <th>
                         <input
+                          style={checkboxStyle}
                           type="checkbox"
                           onChange={() => handleChange(products.id)}
                         />

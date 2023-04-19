@@ -5,11 +5,9 @@ const CollectionSchema = new mongoose.Schema(
     collectionName: {
       type: String,
       required: [true, "Must give name to a Collection"],
+      unique:true
     },
-    products: {
-      type: [String],
-      required: [true, "Must provide IDs of Products"],
-    },
+    products: { type: [Number], required: [true, "Must add Products to Collection"], },
   },
   { timestamps: true }
 );
