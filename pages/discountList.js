@@ -2,8 +2,8 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Modal from "react-modal";
 
-const DiscountList = () => {
-    const route = useRouter();
+const DiscountList = ({filterProductData}) => {
+  const route = useRouter();
   const [isOpen, setIsOpen] = useState(true);
   const customStyles = {
     overlay: {
@@ -17,26 +17,26 @@ const DiscountList = () => {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
     },
+    };
+console.log("filterProductData",filterProductData);
+    const handlePercentDiscount = () => {
+        route.push("/percentDiscount");
+        setIsOpen(false);
+    };
+
+  const handleFlatDiscount = () => {
+    route.push("/flatDiscount");
+    setIsOpen(false);
   };
 
-    const handlePercentDiscount = () => {
-        route.push("/percentDiscount")
-        setIsOpen(false)
-    }
-    const handleFlatDiscount = () => {
-        route.push("/flatDiscount")
-        setIsOpen(false)
-    }
-    
   return (
     <div>
-      {/* <button onClick={() => setIsOpen(true)}>Open Modal</button> */}
       <Modal isOpen={isOpen} style={customStyles}>
         <h1>Select Discount Type </h1>
         <button onClick={handlePercentDiscount}>Percentage Discount</button>
         <br />
         <br />
-        <button onClick={() => handleFlatDiscount(false)}>Flat Amount OFF</button>
+        <button onClick={handleFlatDiscount}> Flat Amount OFF</button>         
         <br />
         <br />
       </Modal>

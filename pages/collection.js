@@ -1,13 +1,20 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
+import DiscountList from "./discountList";
 
 const Collection = ({ filterProductData, products }) => {
   const router = useRouter();
   const [collectionName, setCollectionName] = useState("");
   const handleDiscount = () => {
-    router.push("/discountList");
+    // router.push("/discountList");
+    router.push({
+      pathname: '/discountList',
+      // query: 
+  })
   };
 
+
+  
   const handleCollectionCreate = () => {
     console.log("Collection Name", collectionName);
     console.log("Collection ProductID", products)
@@ -43,7 +50,6 @@ const Collection = ({ filterProductData, products }) => {
           /><br/><br/>
           <h4>Your Collection Name: {collectionName}</h4>
         </div>
-       
         <table className="table" style={{border: "1px solid black"}}>
           <thead>
             <tr>
@@ -104,8 +110,8 @@ const Collection = ({ filterProductData, products }) => {
         <br />
         <br /><button type="button" onClick={handleDiscount}> Add to Discount</button>
       </div>
+     
     </div>
   );
 };
 export default Collection;
-
