@@ -8,19 +8,17 @@ const Collection = ({ filterProductData, products }) => {
   const handleDiscount = () => {
     // router.push("/discountList");
     router.push({
-      pathname: '/discountList',
-      // query: 
-  })
+      pathname: "/discountList",
+      // query:
+    });
   };
 
-
-  
   const handleCollectionCreate = () => {
     console.log("Collection Name", collectionName);
-    console.log("Collection ProductID", products)
+    console.log("Collection ProductID", products);
     // console.log(name,email,phone,address)
     let details = { collectionName, products };
-    console.log("details",details);
+    console.log("details", details);
     fetch("http://localhost:3000/api/addcollection", {
       method: "POST",
       headers: {
@@ -46,11 +44,15 @@ const Collection = ({ filterProductData, products }) => {
             type="text"
             name="Collection Name"
             value={collectionName}
-            onChange={(e) => { setCollectionName(e.target.value) }}
-          /><br/><br/>
+            onChange={(e) => {
+              setCollectionName(e.target.value);
+            }}
+          />
+          <br />
+          <br />
           <h4>Your Collection Name: {collectionName}</h4>
         </div>
-        <table className="table" style={{border: "1px solid black"}}>
+        <table className="table" style={{ border: "1px solid black" }}>
           <thead>
             <tr>
               <th></th>
@@ -67,27 +69,26 @@ const Collection = ({ filterProductData, products }) => {
               filterProductData.map((product, index) => (
                 <tr key={index}>
                   {product?.image && product?.image?.src ? (
-                        <th>
-                          <img
-                            src={product.image.src}
-                            alt="Product Image"
-                            width={60}
-                            height={60}
-                          />
-                        </th>
-                      ) : (
-                        <th>
-                          <img
-                            src="/No Image.jpg"
-                            alt="Product Image"
-                            width={60}
-                            height={60}
-                          />
-                        </th>
-                  )
-                  }
+                    <th>
+                      <img
+                        src={product.image.src}
+                        alt="Product Image"
+                        width={60}
+                        height={60}
+                      />
+                    </th>
+                  ) : (
+                    <th>
+                      <img
+                        src="/No Image.jpg"
+                        alt="Product Image"
+                        width={60}
+                        height={60}
+                      />
+                    </th>
+                  )}
                   <th>{product.title}</th>
-                
+
                   {!product.body_html ? (
                     <th>Null</th>
                   ) : (
@@ -106,11 +107,17 @@ const Collection = ({ filterProductData, products }) => {
               ))}
           </tbody>
         </table>
-        <button type="button" onClick={handleCollectionCreate}> Add to Collection</button>
+        <button type="button" onClick={handleCollectionCreate}>
+          {" "}
+          Add to Collection
+        </button>
         <br />
-        <br /><button type="button" onClick={handleDiscount}> Add to Discount</button>
+        <br />
+        <button type="button" onClick={handleDiscount}>
+          {" "}
+          Add to Discount
+        </button>
       </div>
-     
     </div>
   );
 };
