@@ -26,7 +26,7 @@ function App() {
   );
 
   const handleDiscountButton = () => {
-    router.push("/discount");
+    router.push("/discountList");
   };
   const handleChange = (id) => {
     if (checkBox.includes(id)) {

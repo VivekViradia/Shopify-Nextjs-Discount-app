@@ -5,7 +5,7 @@ const Collection = ({ filterProductData, products }) => {
   const router = useRouter();
   const [collectionName, setCollectionName] = useState("");
   const handleDiscount = () => {
-    router.push("/discount");
+    router.push("/discountList");
   };
 
   const handleCollectionCreate = () => {
