@@ -1,4 +1,3 @@
-import { set } from "mongoose";
 import { useEffect, useState } from "react";
 
 const PercentDiscount = () => {
@@ -16,10 +15,7 @@ const PercentDiscount = () => {
 
     const handleOnClicked = (e) => {
       setPercent(e)
-    console.log("kgfgkfgn");
     };
-    
-    console.log("bbbbbbbbbbb",percent)
 
   return (
     <div>

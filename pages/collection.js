@@ -1,22 +1,25 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import DiscountList from "./discountList";
+import Popup from "./popup";
 
 const Collection = ({ filterProductData, products }) => {
   const router = useRouter();
   const [collectionName, setCollectionName] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+
   const handleDiscount = () => {
     // router.push("/discountList");
     router.push({
       pathname: "/discountList",
-      // query:
+      query: { filterProductData },
     });
   };
 
   const handleCollectionCreate = () => {
     console.log("Collection Name", collectionName);
     console.log("Collection ProductID", products);
-    // console.log(name,email,phone,address)
+    setShowPopup(!showPopup);
     let details = { collectionName, products };
     console.log("details", details);
     fetch("http://localhost:3000/api/addcollection", {
@@ -107,10 +110,13 @@ const Collection = ({ filterProductData, products }) => {
               ))}
           </tbody>
         </table>
-        <button type="button" onClick={handleCollectionCreate}>
-          {" "}
-          Add to Collection
-        </button>
+        <div>
+          <button type="button" onClick={handleCollectionCreate}>
+            Add to Collection
+          </button>
+          {showPopup && <Popup />}
+        </div>
+
         <br />
         <br />
         <button type="button" onClick={handleDiscount}>

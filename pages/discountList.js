@@ -4,7 +4,9 @@ import Modal from "react-modal";
 
 const DiscountList = ({filterProductData}) => {
   const route = useRouter();
+  const ProductData = route.query
   const [isOpen, setIsOpen] = useState(true);
+
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.6)",
@@ -17,8 +19,10 @@ const DiscountList = ({filterProductData}) => {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
     },
-    };
-console.log("filterProductData",filterProductData);
+  };
+
+  console.log("filterProductData", ProductData);
+
     const handlePercentDiscount = () => {
         route.push("/percentDiscount");
         setIsOpen(false);
@@ -36,7 +40,7 @@ console.log("filterProductData",filterProductData);
         <button onClick={handlePercentDiscount}>Percentage Discount</button>
         <br />
         <br />
-        <button onClick={handleFlatDiscount}> Flat Amount OFF</button>         
+        <button onClick={handleFlatDiscount}> Flat Amount OFF</button>
         <br />
         <br />
       </Modal>

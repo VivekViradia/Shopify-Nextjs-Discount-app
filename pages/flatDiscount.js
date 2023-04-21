@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
 const FlatDiscount = () => {
+  const [flat, setFlat] = useState("");
 
     const GetCollections = async () => {
         const response = await fetch('http://localhost:3000/api/getcollection')
@@ -10,14 +11,18 @@ const FlatDiscount = () => {
 
     useEffect(() => {
         GetCollections()
-    },[])
+    }, [])
+  
+    const handleOnClicked = (e) => {
+      setflat(e)
+    };
 
     return (
         <div>
-          <h1>Welcome to Percentage Discount</h1>
+          <h1>Welcome to Flatage Discount</h1>
     
           <div>
-            <input type="text" value={percent} onChange={(e) => handleOnClicked(e.target.value)} />
+            <input type="text" value={flat} onChange={(e) => handleOnClicked(e.target.value)} />
           </div>
               <div>
                   <table className="table" style={{border: "1px solid black"}}>
