@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 const FlatDiscount = () => {
-  const [flat, setFlat] = useState("");
+  // const [flat, setFlat] = useState("");
 
     const GetCollections = async () => {
         const response = await fetch('http://localhost:3000/api/getcollection')

@@ -1,20 +1,25 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DiscountList from "./discountList";
 import Popup from "./popup";
 
 const Collection = ({ filterProductData, products }) => {
   const router = useRouter();
   const [collectionName, setCollectionName] = useState("");
+  const [productData, setProductData] = useState("");
   const [showPopup, setShowPopup] = useState(false);
 
   const handleDiscount = () => {
     // router.push("/discountList");
     router.push({
       pathname: "/discountList",
-      query: { filterProductData },
+      query: {productData},
     });
   };
+  useEffect(() => {
+    setProductData(filterProductData);
+  }, []);
+  console.log("ProductData", productData);
 
   const handleCollectionCreate = () => {
     console.log("Collection Name", collectionName);

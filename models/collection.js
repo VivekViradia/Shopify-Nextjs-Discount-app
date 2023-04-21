@@ -8,6 +8,7 @@ const CollectionSchema = new mongoose.Schema(
       unique:true
     },
     products: { type: [Number], required: [true, "Must add Products to Collection"], },
+    discount: { type: Number, default:0 },
   },
   { timestamps: true }
 );

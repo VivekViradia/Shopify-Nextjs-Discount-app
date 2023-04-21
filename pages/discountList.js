@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Modal from "react-modal";
 
-const DiscountList = ({filterProductData}) => {
+const DiscountList = () => {
   const route = useRouter();
   const ProductData = route.query
   const [isOpen, setIsOpen] = useState(true);
