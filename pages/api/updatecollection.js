@@ -19,4 +19,3 @@ const product_update = async (req, res) => {
     res.json({ message: error });
   }
 };
-
