@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import Head from "next/head";
 import Product from "./products";
 
 function App() {
   const [getProducts, setGetProducts] = useState([]);
-  const [checkBox, setCheckBox] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -23,7 +21,7 @@ function App() {
     <>
       <div className="product-grid">
         {getProducts.map((product, index) => (
-          <Product key={index} product={product} />
+          <Product key={index} products={product} />
         ))}
       </div>
     </>
