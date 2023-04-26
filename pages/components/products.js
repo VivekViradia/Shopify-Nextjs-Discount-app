@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Product = ({ products }) => {
+const [varientsID,setVarientsID] = useState([])
 
   return (
     <div className="product-grid-container">
@@ -21,17 +22,18 @@ const Product = ({ products }) => {
         <p>Description:{products.body_html}</p>
       )}
       <p>Manufacturing Date:{products.created_at.slice(0, 10)}</p>
-          <p>Status: {products.status}</p>
-          {products.variants && products.variants.length == 1 ? (
-                      products?.variants?.map((vart, index) => (
-                        <p key={index}>Price:{vart?.price}</p>
-                      ))
-                    ) : (
-                    //   <button onClick={(vart) => handleOnClicked(vart)}>
-                    //     Load More variants
-                    //   </button>
-                  <p>Also Avaiable in Different Varients</p>
-                    )}
+      <p>Status: {products.status}</p>
+      {products.variants && products.variants.length == 1 ? (
+        products?.variants?.map((vart, index) => (
+          <p key={index}>Price:{vart?.price}</p>
+        ))
+      ) : ( 
+        //   <button onClick={(vart) => handleOnClicked(vart)}>
+        //     Load More variants
+        //   </button>
+
+        <p>Also Avaiable in Different Varients</p>
+      )}
     </div>
   );
 };
