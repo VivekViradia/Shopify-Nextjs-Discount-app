@@ -15,8 +15,6 @@ function App() {
     fetchData();
   }, []);
 
-  console.log("getProducts", getProducts);
-
   return (
     <>
       <div className="product-grid" >

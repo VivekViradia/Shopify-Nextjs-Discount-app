@@ -17,12 +17,17 @@
   /* height: 60vh;  */
   height: 100%; 
 }
-div:hover {
+/* div:hover {
   box-shadow: 5px 5px 5px #888888;
-}
+} */
 p:hover {
   text-decoration: underline;
 }
 h3:hover {
   text-decoration: underline;
+}
+
+.product-grid-container:hover{
+  
+  box-shadow: 5px 5px 5px #888888;
 }

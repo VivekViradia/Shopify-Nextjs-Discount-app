@@ -5,13 +5,11 @@ const Product = ({ products }) => {
   const router = useRouter()
 
   const handleOnClick = (id) => {
-    console.log("Handle On Click",id);
     router.push({
       pathname: "/components/product",
       query: {id}
     })
   };
-  // console.log("Products0",products.id)
 
   return (
     <div
