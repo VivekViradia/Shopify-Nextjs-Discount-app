@@ -15,10 +15,10 @@ const Product = () => {
     GetProducts();
   }, []);
 
-  const result = getProducts.filter((obj) => obj.id === parseInt(productID.id));
+  const productData = getProducts.filter((obj) => obj.id === parseInt(productID.id));
 
-  if (result) {
-    console.log("Match found:", result);
+  if (productData) {
+    console.log("Match found:",productData);
   } else {
     console.log("No match found.");
   }
