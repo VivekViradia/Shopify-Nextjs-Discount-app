@@ -2,8 +2,6 @@ import Collection from "../../models/collection.js";
 import connectDb from "@/middleware/mongoose";
 
 const handler = async (req, res) => {
-
-
   const collection = new Collection({
     collectionName: req.body.collectionName,
     products: req.body.products,

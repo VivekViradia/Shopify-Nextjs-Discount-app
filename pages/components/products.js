@@ -1,10 +1,23 @@
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 const Product = ({ products }) => {
-const [varientsID,setVarientsID] = useState([])
+  const router = useRouter()
+
+  const handleOnClick = (id) => {
+    console.log("Handle On Click",id);
+    router.push({
+      pathname: "/components/product",
+      query: {id}
+    })
+  };
+  // console.log("Products0",products.id)
 
   return (
-    <div className="product-grid-container">
+    <div
+      className="product-grid-container"
+      onClick={()=>handleOnClick(products.id)}
+    >
       {products?.image && products?.image?.src ? (
         <img
           src={products.image.src}
@@ -27,7 +40,7 @@ const [varientsID,setVarientsID] = useState([])
         products?.variants?.map((vart, index) => (
           <p key={index}>Price:{vart?.price}</p>
         ))
-      ) : ( 
+      ) : (
         //   <button onClick={(vart) => handleOnClicked(vart)}>
         //     Load More variants
         //   </button>
@@ -35,6 +48,7 @@ const [varientsID,setVarientsID] = useState([])
         <p>Also Avaiable in Different Varients</p>
       )}
     </div>
+
   );
 };
 

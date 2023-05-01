@@ -17,13 +17,9 @@ function App() {
 
   console.log("getProducts", getProducts);
 
-  const handleOnClick = () => {
-    console.log("123456789")
-  }
-
   return (
     <>
-      <div className="product-grid" onClick={handleOnClick}>
+      <div className="product-grid" >
         {getProducts.map((product, index) => (
           <Product key={index} products={product} />
         ))}
