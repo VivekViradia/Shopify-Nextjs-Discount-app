@@ -7,7 +7,7 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch("/api/shopify");
+      const res = await fetch("http://localhost:3000/api/shopify");
       const data = await res.json();
       setGetProducts(data);
     }
