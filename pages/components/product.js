@@ -65,10 +65,16 @@ const Product = () => {
                     <div key={index}>
                       <p>Price: {vart.price}</p>
                       <p>Manufacturing Date: {vart.created_at.slice(0, 10)}</p>
-                    <p>Colors Avaiable</p>
-                    {
-                      vart.option2 === null ? console.log("Null"):<ColorCircle color={vart.option2} />
-                    }
+
+                      {vart.option2 === null ? (
+                        console.log("Null")
+                      ) : (
+                        <>
+                          {" "}
+                          <p>Colors Avaiable</p>
+                          <ColorCircle color={vart.option2} />{" "}
+                        </>
+                      )}
                     </div>
                   ))
 
