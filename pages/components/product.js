@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import ColorCircle from "./colorCircle";
 
 const Product = () => {
   const [getProducts, setGetProducts] = useState([]);
@@ -52,10 +53,14 @@ const Product = () => {
             <p>Manufacturing Date: {item.created_at.slice(0, 10)}</p>
             <p>Product Avaiablity: {item.status}</p>
             <p>Vendor: {item.vendor}</p>
-            <p>Colors &nbsp;
-          <div className="circle red"></div>
-          <div className="circle blue"></div>
-          <div className="circle green"></div></p>
+            {
+              item.varients && item.varients.length > 1
+                ? console.log("Less than 1 Variants")
+                : console.log("More than 1 Variants")
+              // console.log ("length of Variants",item.variants.length)
+            }
+            <p>Colors Avaiable</p>
+            <ColorCircle color="red" />
           </div>
         </div>
       ))}

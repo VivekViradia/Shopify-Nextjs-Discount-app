@@ -20,20 +20,20 @@
 /* div:hover {
   box-shadow: 5px 5px 5px #888888;
 } */
-p:hover {
+/* p:hover {
   text-decoration: underline;
 }
 h3:hover {
   text-decoration: underline;
-}
+} */
 
 .product-grid-container:hover{
-  
+  cursor: pointer;
   box-shadow: 5px 5px 5px #888888;
 }
 
 .div-css{
-  border: 1px solid rgb(183, 31, 31);
+  border: 1px solid rgb(0, 0, 0);
 }
 
 .circle {
