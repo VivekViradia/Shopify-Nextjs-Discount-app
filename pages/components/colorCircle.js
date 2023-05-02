@@ -7,6 +7,8 @@ const ColorCircle = ({ color }) => {
         borderRadius: '50%',
         backgroundColor: color,
         display: 'inline-block',
+        border:'2px solid',
+        borderColor:'#000000'
        
         
     }

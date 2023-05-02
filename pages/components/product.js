@@ -50,17 +50,28 @@ const Product = () => {
           <div className="div-css col-sm-4 ">
             <h1>{item.title}</h1>
             <p>Description: {item.body_html}</p>
-            <p>Manufacturing Date: {item.created_at.slice(0, 10)}</p>
+
             <p>Product Avaiablity: {item.status}</p>
             <p>Vendor: {item.vendor}</p>
+            {item.variants && item.variants.length > 1 ? (
+              <p>Vivek</p>
+            ) : (
+              <p>Viradia</p>
+            )}
             {
-              item.variants && item.variants.length > 0
-                ? console.log("Less than 1 Variants",item.variants.length)
-                : console.log("More than 1 Variants",item.variants.length)
+              item.variants && item.variants.length > 1
+                ? console.log("More than 1 Variants", item.variants.length)
+                : item.variants.map((vart, index) => (
+                    <div key={index}>
+                      <p>Price: {vart.price}</p>
+                      <p>Manufacturing Date: {vart.created_at.slice(0, 10)}</p>
+                      <p>Colors Avaiable</p>
+                      <ColorCircle color={vart.option2} />
+                    </div>
+                  ))
+
               // console.log ("length of Variants",item.variants.length)
             }
-            <p>Colors Avaiable</p>
-            <ColorCircle color="red" />
           </div>
         </div>
       ))}
