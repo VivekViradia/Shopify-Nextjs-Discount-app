@@ -30,7 +30,7 @@ const Product = () => {
 
   const handleColorCircle = () => {
     console.log("handleColorCircle");
-    setBorderColor("black");
+    setBorderColor("hotpink");
     // setCircleCount()
   };
 
@@ -68,29 +68,29 @@ const Product = () => {
             )} */}
             {item.variants && item.variants.length > 1
               ? item.variants.map((vart, index) => (
-                  <div key={index} className="color-circle-row">
+                  <span key={index} className="color-circle-row">
                     <ColorCircle
                       color={vart.option2}
                       borderColor={borderColor}
                       onClick={handleColorCircle}
                     />
-                  </div>
+                  </span>
                 ))
               : item.variants.map((vart, index) => (
-                  <div key={index}>
+                  <span key={index}>
                     <p>Price: {vart.price}</p>
                     <p>Manufacturing Date: {vart.created_at.slice(0, 10)}</p>
 
                     {vart.option2 === null ? (
                       console.log("Null")
                     ) : (
-                      <div>
+                      <span>
                         {" "}
                         <p>Colors Avaiable</p>
                         <ColorCircle color={vart.option2} />{" "}
-                      </div>
+                      </span>
                     )}
-                  </div>
+                  </span>
                 ))}
           </div>
         </div>
