@@ -10,7 +10,7 @@ const ColorCircle = ({ color }) => {
         border:'2px solid',
         borderColor:'#000000'
     }
-    return <div style={circleStyle}></div>
+    return <div className="color-circle-row" style={circleStyle}></div>
 }
 
 export default ColorCircle;

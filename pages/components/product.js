@@ -58,28 +58,28 @@ const Product = () => {
             ) : (
               <p>Viradia</p>
             )}
-            {
-              item.variants && item.variants.length > 1
-                ? console.log("More than 1 Variants", item.variants.length)
-                : item.variants.map((vart, index) => (
-                    <div key={index}>
-                      <p>Price: {vart.price}</p>
-                      <p>Manufacturing Date: {vart.created_at.slice(0, 10)}</p>
+            {item.variants && item.variants.length > 1
+              ? item.variants.map((vart, index) => (
+                  <div key={index}>
+                    <ColorCircle color={vart.option2} />
+                  </div>
+                ))
+              : item.variants.map((vart, index) => (
+                  <div key={index}>
+                    <p>Price: {vart.price}</p>
+                    <p>Manufacturing Date: {vart.created_at.slice(0, 10)}</p>
 
-                      {vart.option2 === null ? (
-                        console.log("Null")
-                      ) : (
-                        <>
-                          {" "}
-                          <p>Colors Avaiable</p>
-                          <ColorCircle color={vart.option2} />{" "}
-                        </>
-                      )}
-                    </div>
-                  ))
-
-              // console.log ("length of Variants",item.variants.length)
-            }
+                    {vart.option2 === null ? (
+                      console.log("Null")
+                    ) : (
+                      <div>
+                        {" "}
+                        <p>Colors Avaiable</p>
+                        <ColorCircle color={vart.option2} />{" "}
+                      </div>
+                    )}
+                  </div>
+                ))}
           </div>
         </div>
       ))}
