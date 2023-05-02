@@ -4,6 +4,8 @@ import ColorCircle from "./colorCircle";
 
 const Product = () => {
   const [getProducts, setGetProducts] = useState([]);
+  const [circleCount, setCircleCount] = useState();
+  const [borderColor, setBorderColor] = useState("white");
   const router = useRouter();
   const productID = router.query;
 
@@ -25,6 +27,12 @@ const Product = () => {
   } else {
     console.log("No match found.");
   }
+
+  const handleColorCircle = () => {
+    console.log("handleColorCircle");
+    setBorderColor("black");
+    // setCircleCount()
+  };
 
   return (
     <div className="container">
@@ -61,7 +69,11 @@ const Product = () => {
             {item.variants && item.variants.length > 1
               ? item.variants.map((vart, index) => (
                   <div key={index} className="color-circle-row">
-                    <ColorCircle color={vart.option2} />
+                    <ColorCircle
+                      color={vart.option2}
+                      borderColor={borderColor}
+                      onClick={handleColorCircle}
+                    />
                   </div>
                 ))
               : item.variants.map((vart, index) => (

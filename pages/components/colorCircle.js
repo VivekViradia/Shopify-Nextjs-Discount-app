@@ -1,16 +1,22 @@
 import React from "react";
 
-const ColorCircle = ({ color }) => {
-    const circleStyle = {
-        width: '18px',
-        height: '18px',
-        borderRadius: '50%',
-        backgroundColor: color,
-        display: 'inline-block',
-        border:'2px solid',
-        borderColor:'#000000'
-    }
-    return <div className="color-circle-row" style={circleStyle}></div>
-}
+const ColorCircle = ({ color, borderColor, onClick }) => {
+  const circleStyle = {
+    width: "25px",
+    height: "25px",
+    borderRadius: "50%",
+    backgroundColor: color,
+    display: "inline-block",
+    border: "2px solid",
+    borderColor: borderColor,
+  };
+  return (
+    <button
+      className="color-circle-row"
+      style={circleStyle}
+      onClick={onClick}
+    ></button>
+  );
+};
 
 export default ColorCircle;
