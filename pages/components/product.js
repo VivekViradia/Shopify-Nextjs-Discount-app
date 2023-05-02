@@ -54,9 +54,9 @@ const Product = () => {
             <p>Product Avaiablity: {item.status}</p>
             <p>Vendor: {item.vendor}</p>
             {
-              item.varients && item.varients.length > 1
-                ? console.log("Less than 1 Variants")
-                : console.log("More than 1 Variants")
+              item.variants && item.variants.length > 0
+                ? console.log("Less than 1 Variants",item.variants.length)
+                : console.log("More than 1 Variants",item.variants.length)
               // console.log ("length of Variants",item.variants.length)
             }
             <p>Colors Avaiable</p>
