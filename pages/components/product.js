@@ -53,14 +53,14 @@ const Product = () => {
 
             <p>Product Avaiablity: {item.status}</p>
             <p>Vendor: {item.vendor}</p>
-            {item.variants && item.variants.length > 1 ? (
+            {/* {item.variants && item.variants.length > 1 ? (
               <p>Vivek</p>
             ) : (
               <p>Viradia</p>
-            )}
+            )} */}
             {item.variants && item.variants.length > 1
               ? item.variants.map((vart, index) => (
-                  <div key={index}>
+                  <div key={index} className="color-circle-row">
                     <ColorCircle color={vart.option2} />
                   </div>
                 ))

@@ -37,6 +37,7 @@ h3:hover {
 }
 
 .color-circle-row {
-  display: flex;
-  flex-direction: row;
+  display:contents;
+  margin-left: 5px;
+  /* flex-direction: row; */
 }
