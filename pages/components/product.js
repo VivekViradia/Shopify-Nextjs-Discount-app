@@ -35,15 +35,15 @@ const Product = () => {
               <img
                 src={item.image.src}
                 alt="Product Image"
-                widp={700}
-                height={700}
+                widp={500}
+                height={500}
               />
             ) : (
               <img
                 src="/No Image.jpg"
                 alt="Product Image"
-                widp={700}
-                height={700}
+                widp={500}
+                height={500}
               />
             )}
           </div>
@@ -65,8 +65,10 @@ const Product = () => {
                     <div key={index}>
                       <p>Price: {vart.price}</p>
                       <p>Manufacturing Date: {vart.created_at.slice(0, 10)}</p>
-                      <p>Colors Avaiable</p>
-                      <ColorCircle color={vart.option2} />
+                    <p>Colors Avaiable</p>
+                    {
+                      vart.option2 === null ? console.log("Null"):<ColorCircle color={vart.option2} />
+                    }
                     </div>
                   ))
 

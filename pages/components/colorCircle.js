@@ -9,8 +9,6 @@ const ColorCircle = ({ color }) => {
         display: 'inline-block',
         border:'2px solid',
         borderColor:'#000000'
-       
-        
     }
     return <div style={circleStyle}></div>
 }
