@@ -27,7 +27,7 @@ h3:hover {
   text-decoration: underline;
 } */
 
-.product-grid-container:hover{
+.product-grid-container:hover {
   cursor: pointer;
   box-shadow: 5px 5px 5px #888888;
 }

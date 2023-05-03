@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { useRouter } from "next/router";
 import Collection from "./collection";
-import Head from "next/head";
+
 
 function App() {
   const router = useRouter();
