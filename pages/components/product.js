@@ -44,14 +44,24 @@ const Product = () => {
       {productData.map((item) => (
         <div className="div-css row " key={item.id}>
           <div className="div-css ">
-            {item?.image && item?.image?.src ? (
-              <img
-                src={item.image.src}
-                alt="Product Image"
-                widp={500}
-                height={500}
-              />
-            ) : (
+            {
+              item.variants.map((vart)=>console.log("123456789*//*/*546546546+6/",vart.id[0]))
+            }
+            {item.variants.length >= 1 &&
+              item.images.map((img) => (
+                <>
+                  {img.variant_ids[0] === textID && (
+                    <img
+                      key={img.variant_ids}
+                      src={img.src}
+                      alt="Product Image"
+                      widp={500}
+                      height={500}
+                    />
+                  )}
+                </>
+              ))}
+            {item?.image && item?.image?.src != null ? null : (
               <img
                 src="/No Image.jpg"
                 alt="Product Image"
@@ -63,11 +73,10 @@ const Product = () => {
           <div className="div-css  ">
             <h1>{item.title}</h1>
             <p>Description: {item.body_html}</p>
-
             <p>Product Avaiablity: {item.status}</p>
             <p>Vendor: {item.vendor}</p>
             {item.variants.length > 1 ? <p>Colors Avaiable</p> : null}
-           
+
             {item.variants && item.variants.length > 1
               ? item.variants.map((vart) => (
                   <span
@@ -89,7 +98,6 @@ const Product = () => {
                     ) : (
                       <span>
                         {" "}
-                       
                         <ColorCircle color={vart.option2} />{" "}
                       </span>
                     )}

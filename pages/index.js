@@ -29,6 +29,7 @@ function App() {
   const handleDiscountButton = () => {
     router.push("/discountList");
   };
+
   const handleChange = (id) => {
     if (checkBox.includes(id)) {
       const index = checkBox.indexOf(id);
@@ -39,6 +40,7 @@ function App() {
       setCheckBox([...checkBox, id]);
     }
   };
+  
 const checkboxStyle = {
     width: '15px',
     height: '15px',
