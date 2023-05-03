@@ -30,14 +30,14 @@ const Product = () => {
 
   const handleColorCircle = () => {
     console.log("handleColorCircle");
-    setBorderColor("hotpink");
+    setBorderColor("black");
     // setCircleCount()
   };
 
   return (
     <div className="container">
-      {productData.map((item, index) => (
-        <div className="div-css row " key={index}>
+      {productData.map((item) => (
+        <div className="div-css row " key={item.id}>
           <div className="div-css col-sm-8 ">
             {item?.image && item?.image?.src ? (
               <img
@@ -61,14 +61,9 @@ const Product = () => {
 
             <p>Product Avaiablity: {item.status}</p>
             <p>Vendor: {item.vendor}</p>
-            {/* {item.variants && item.variants.length > 1 ? (
-              <p>Vivek</p>
-            ) : (
-              <p>Viradia</p>
-            )} */}
             {item.variants && item.variants.length > 1
-              ? item.variants.map((vart, index) => (
-                  <span key={index} className="color-circle-row">
+              ? item.variants.map((vart) => (
+                  <span key={vart.id} className="color-circle-row">
                     <ColorCircle
                       color={vart.option2}
                       borderColor={borderColor}
@@ -76,11 +71,8 @@ const Product = () => {
                     />
                   </span>
                 ))
-              : item.variants.map((vart, index) => (
-                  <span key={index}>
-                    <p>Price: {vart.price}</p>
-                    <p>Manufacturing Date: {vart.created_at.slice(0, 10)}</p>
-
+              : item.variants.map((vart) => (
+                  <span key={vart.id}>
                     {vart.option2 === null ? (
                       console.log("Null")
                     ) : (
@@ -91,7 +83,19 @@ const Product = () => {
                       </span>
                     )}
                   </span>
-                ))}
+              ))}{
+              item.variants.length > 1 ? (item.variants.map((vart) => (
+                <span key={vart.id}>
+                  <p>Price:{ vart.price}</p>
+                  <p>Price:{ vart.created_at.slice(0,10)}</p>
+                </span>
+              ))) : (item.variants.map((vart) => (
+                <span key={vart.id}>
+                  <p>Price: {vart.price }</p>
+                  <p>Manufacture Date: {vart.created_at.slice(0,10) }</p>
+                </span>
+              )))
+                }
           </div>
         </div>
       ))}
