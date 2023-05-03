@@ -44,9 +44,7 @@ const Product = () => {
       {productData.map((item) => (
         <div className="div-css row " key={item.id}>
           <div className="div-css ">
-            {
-              item.variants.map((vart)=>console.log("123456789*//*/*546546546+6/",vart.id[0]))
-            }
+           
             {item.variants.length >= 1 &&
               item.images.map((img) => (
                 <>
@@ -108,16 +106,16 @@ const Product = () => {
                   <>
                     {vart.id === textID && (
                       <span key={vart.id}>
-                        <p>Price:{vart.price}</p>
-                        <p>Price:{vart.option2}</p>
-                        <p>Price:{vart.created_at.slice(0, 10)}</p>
+                        <p>Price: {vart.price}Rs</p>
+                        <p>Color: {vart.option2}</p>
+                        <p>Manufacture Date: {vart.created_at.slice(0, 10)}</p>
                       </span>
                     )}{" "}
                   </>
                 ))
               : item.variants.map((vart) => (
                   <span key={vart.id}>
-                    <p>Price: {vart.price}</p>
+                    <p>Price: {vart.price}Rs</p>
                     <p>Manufacture Date: {vart.created_at.slice(0, 10)}</p>
                   </span>
                 ))}
