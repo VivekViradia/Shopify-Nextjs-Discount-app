@@ -3,36 +3,29 @@ import React, { useEffect, useState } from "react";
 import ColorCircle from "./colorCircle";
 
 const Product = () => {
+  const [getProducts, setGetProducts] = useState([]);
+  const [textID, setTextID] = useState();
+  const [borderColor, setBorderColor] = useState("black");
   const router = useRouter();
   const productID = router.query;
-  const [getProducts, setGetProducts] = useState([]);
-  const [variantID, setVariantID] = useState(productID.variant_id);
-  const [borderColor, setBorderColor] = useState("black");
-
-  console.log(" ProductID.variant_id", productID.variant_id);
-  console.log("State Variant ID", variantID);
 
   const GetProducts = async () => {
     const response = await fetch("/api/shopify");
+
     const data = await response.json();
     setGetProducts(data);
   };
   useEffect(() => {
     GetProducts();
-  }, [variantID, productID.variant_id]);
-
-  console.log("Product API", getProducts);
-
+  }, []);
   const productData = getProducts.filter(
     (obj) => obj.id === parseInt(productID.id)
   );
-
   if (productData) {
     console.log("Match found:", productData);
   } else {
     console.log("No match found.");
   }
-
   const handleColorCircle = (id) => {
     // console.log("handleColorCircle");
     setBorderColor("black");
@@ -41,53 +34,28 @@ const Product = () => {
 
   const handleText = (id) => {
     // console.log("Text ID", id);
-    setVariantID(id);
-    console.log("Inside HandleText Function VariantID", variantID);
+    setTextID(id);
   };
 
   return (
     <div className="container">
-      {console.log("123456", getProducts, productData)}
       {productData.map((item) => (
         <div className="div-css row " key={item.id}>
           <div className="div-css ">
-            {item.variants.length >= 1 && (
-              <>
-                {item.images.length <= 1 ? (
-                  item.images.map((img) => (
-                    <>
-                      {img.variant_ids[0] ===
-                        variantID(
-                          <img
-                            key={img.variant_ids}
-                            src={img.src}
-                            alt="Product Image"
-                            widp={500}
-                            height={500}
-                          />
-                        )}
-                    </>
-                  ))
-                ) : (
-                  <>
-                    {item.images.map((img) => {
-                      return (
-                        img.variant_ids.length === 0 && (
-                          <img
-                            key={img.variant_ids}
-                            src={img.src}
-                            alt="Product Image"
-                            widp={500}
-                            height={500}
-                          />
-                        )
-                      );
-                    })}
-                  </>
-                )}
-              </>
-            )}
-
+            {item.variants.length >= 1 &&
+              item.images.map((img) => (
+                <>
+                  {img.variant_ids[0] === textID && (
+                    <img
+                      key={img.variant_ids}
+                      src={img.src}
+                      alt="Product Image"
+                      width={500}
+                      height={500}
+                    />
+                  )}
+                </>
+              ))}
             {item?.image && item?.image?.src != null ? null : (
               <img
                 src="/No Image.jpg"
@@ -120,7 +88,7 @@ const Product = () => {
               : item.variants.map((vart) => (
                   <span key={vart.id}>
                     {vart.option2 === null ? (
-                      console.log("Only one Variant Avaiable")
+                      console.log("Null")
                     ) : (
                       <span>
                         {" "}
@@ -131,15 +99,16 @@ const Product = () => {
                 ))}
             {item.variants.length > 1
               ? item.variants.map((vart) => (
-                  <span key={vart.id}>
-                    {vart.id === variantID && (
+                  <>
+                    {vart.id === textID && (
                       <span key={vart.id}>
                         <p>Price: {vart.price}Rs</p>
                         <p>Color: {vart.option2}</p>
+
                         <p>Manufacture Date: {vart.created_at.slice(0, 10)}</p>
                       </span>
                     )}{" "}
-                  </span>
+                  </>
                 ))
               : item.variants.map((vart) => (
                   <span key={vart.id}>
@@ -153,5 +122,4 @@ const Product = () => {
     </div>
   );
 };
-
 export default Product;
