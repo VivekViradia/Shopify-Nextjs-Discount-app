@@ -9,8 +9,8 @@ const Product = () => {
   const [variantID, setVariantID] = useState(productID.variant_id);
   const [borderColor, setBorderColor] = useState("black");
 
-console.log("router", productID.variant_id)
-console.log("State Variant ID", variantID)
+  console.log(" ProductID.variant_id", productID.variant_id);
+  console.log("State Variant ID", variantID);
 
   const GetProducts = async () => {
     const response = await fetch("/api/shopify");
@@ -19,7 +19,9 @@ console.log("State Variant ID", variantID)
   };
   useEffect(() => {
     GetProducts();
-  }, []);
+  }, [variantID, productID.variant_id]);
+
+  console.log("Product API", getProducts);
 
   const productData = getProducts.filter(
     (obj) => obj.id === parseInt(productID.id)
@@ -40,27 +42,52 @@ console.log("State Variant ID", variantID)
   const handleText = (id) => {
     // console.log("Text ID", id);
     setVariantID(id);
+    console.log("Inside HandleText Function VariantID", variantID);
   };
 
   return (
     <div className="container">
+      {console.log("123456", getProducts, productData)}
       {productData.map((item) => (
         <div className="div-css row " key={item.id}>
           <div className="div-css ">
-            {item.variants.length >= 1 &&
-              item.images.map((img) => (
-                <>{ console.log("variantID Checking",variantID)}
-                  {img.variant_ids[0] === variantID && (
-                    <img
-                      key={img.variant_ids}
-                      src={img.src}
-                      alt="Product Image"
-                      widp={500}
-                      height={500}
-                    />
-                  )}
-                </>
-              ))}
+            {item.variants.length >= 1 && (
+              <>
+                {item.images.length <= 1 ? (
+                  item.images.map((img) => (
+                    <>
+                      {img.variant_ids[0] ===
+                        variantID(
+                          <img
+                            key={img.variant_ids}
+                            src={img.src}
+                            alt="Product Image"
+                            widp={500}
+                            height={500}
+                          />
+                        )}
+                    </>
+                  ))
+                ) : (
+                  <>
+                    {item.images.map((img) => {
+                      return (
+                        img.variant_ids.length === 0 && (
+                          <img
+                            key={img.variant_ids}
+                            src={img.src}
+                            alt="Product Image"
+                            widp={500}
+                            height={500}
+                          />
+                        )
+                      );
+                    })}
+                  </>
+                )}
+              </>
+            )}
+
             {item?.image && item?.image?.src != null ? null : (
               <img
                 src="/No Image.jpg"
@@ -76,7 +103,6 @@ console.log("State Variant ID", variantID)
             <p>Product Avaiablity: {item.status}</p>
             <p>Vendor: {item.vendor}</p>
             {item.variants.length > 1 ? <p>Colors Avaiable</p> : null}
-
             {item.variants && item.variants.length > 1
               ? item.variants.map((vart) => (
                   <span
@@ -105,7 +131,7 @@ console.log("State Variant ID", variantID)
                 ))}
             {item.variants.length > 1
               ? item.variants.map((vart) => (
-                  <>
+                  <span key={vart.id}>
                     {vart.id === variantID && (
                       <span key={vart.id}>
                         <p>Price: {vart.price}Rs</p>
@@ -113,7 +139,7 @@ console.log("State Variant ID", variantID)
                         <p>Manufacture Date: {vart.created_at.slice(0, 10)}</p>
                       </span>
                     )}{" "}
-                  </>
+                  </span>
                 ))
               : item.variants.map((vart) => (
                   <span key={vart.id}>
