@@ -3,11 +3,14 @@ import React, { useEffect, useState } from "react";
 import ColorCircle from "./colorCircle";
 
 const Product = () => {
-  const [getProducts, setGetProducts] = useState([]);
-  const [textID, setTextID] = useState();
-  const [borderColor, setBorderColor] = useState("black");
   const router = useRouter();
   const productID = router.query;
+  const [getProducts, setGetProducts] = useState([]);
+  const [variantID, setVariantID] = useState(productID.variant_id);
+  const [borderColor, setBorderColor] = useState("black");
+
+console.log("router", productID.variant_id)
+console.log("State Variant ID", variantID)
 
   const GetProducts = async () => {
     const response = await fetch("/api/shopify");
@@ -36,7 +39,7 @@ const Product = () => {
 
   const handleText = (id) => {
     // console.log("Text ID", id);
-    setTextID(id);
+    setVariantID(id);
   };
 
   return (
@@ -44,11 +47,10 @@ const Product = () => {
       {productData.map((item) => (
         <div className="div-css row " key={item.id}>
           <div className="div-css ">
-           
             {item.variants.length >= 1 &&
               item.images.map((img) => (
-                <>
-                  {img.variant_ids[0] === textID && (
+                <>{ console.log("variantID Checking",variantID)}
+                  {img.variant_ids[0] === variantID && (
                     <img
                       key={img.variant_ids}
                       src={img.src}
@@ -92,7 +94,7 @@ const Product = () => {
               : item.variants.map((vart) => (
                   <span key={vart.id}>
                     {vart.option2 === null ? (
-                      console.log("Null")
+                      console.log("Only one Variant Avaiable")
                     ) : (
                       <span>
                         {" "}
@@ -104,7 +106,7 @@ const Product = () => {
             {item.variants.length > 1
               ? item.variants.map((vart) => (
                   <>
-                    {vart.id === textID && (
+                    {vart.id === variantID && (
                       <span key={vart.id}>
                         <p>Price: {vart.price}Rs</p>
                         <p>Color: {vart.option2}</p>

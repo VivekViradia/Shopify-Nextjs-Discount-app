@@ -4,17 +4,19 @@ import React, { useState } from "react";
 const Product = ({ products }) => {
   const router = useRouter();
 
-  const handleOnClick = (id) => {
+  const handleOnClick = (id,variant_id) => {
     router.push({
       pathname: "/components/product",
-      query: { id },
+      query: { id,variant_id },
     });
   };
+
+console.log("Products Variants ID",products.variants[0].id)
 
   return (
     <div
       className="product-grid-container"
-      onClick={() => handleOnClick(products.id)}
+      onClick={() => handleOnClick(products.id,products.variants[0].id)}
     >
       {products?.image && products?.image?.src ? (
         <img
