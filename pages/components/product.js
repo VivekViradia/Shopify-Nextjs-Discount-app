@@ -9,8 +9,8 @@ const Product = () => {
   const [textID, setTextID] = useState(productID.variant_id);
   const [borderColor, setBorderColor] = useState("black");
 
-console.log("productID",productID.variant_id)
-console.log("TextID",textID)
+  console.log("productID", productID.variant_id);
+  console.log("TextID", textID);
 
   const GetProducts = async () => {
     const response = await fetch("/api/shopify");
@@ -18,9 +18,13 @@ console.log("TextID",textID)
     setGetProducts(data);
   };
 
-  useEffect(() => {
-    GetProducts();
-  }, [productID.variant_id]);
+  useEffect(
+    () => {
+      GetProducts();
+    },
+    [productID.variant_id],
+    textID
+  );
 
   const productData = getProducts.filter(
     (obj) => obj.id === parseInt(productID.id)
@@ -45,7 +49,7 @@ console.log("TextID",textID)
       {productData.map((item) => (
         <div className="div-css row " key={item.id}>
           <div className="div-css ">
-            {item.variants.length >= 1 &&
+            {/* {item.variants.length >= 1 &&
               item.images.map((img) => (
                 <>
                   {img.variant_ids[0] === textID && (
@@ -66,6 +70,28 @@ console.log("TextID",textID)
                 widp={500}
                 height={500}
               />
+            )} */}
+            {item.variants.length <= 1 ? (
+              item.images.length >= 1 ? (
+                item.images.map((img) => (
+                  <img
+                    key={img.variant_ids}
+                    src={img.src}
+                    alt="Product Image"
+                    width={500}
+                    height={500}
+                  />
+                ))
+              ) : (
+                <img
+                  src="/No Image.jpg"
+                  alt="Product Image"
+                  widp={500}
+                  height={500}
+                />
+              )
+            ) : (
+              console.log("Here More Than One Variant Logic")
             )}
           </div>
           <div className="div-css  ">
@@ -90,9 +116,7 @@ console.log("TextID",textID)
                 ))
               : item.variants.map((vart) => (
                   <span key={vart.id}>
-                    {vart.option2 === null ? (
-                      console.log("Single Variant Project")
-                    ) : (
+                    {vart.option2 === null ? null : (
                       <span>
                         {" "}
                         <ColorCircle color={vart.option2} />{" "}
