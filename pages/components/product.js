@@ -3,37 +3,40 @@ import React, { useEffect, useState } from "react";
 import ColorCircle from "./colorCircle";
 
 const Product = () => {
-  const [getProducts, setGetProducts] = useState([]);
-  const [textID, setTextID] = useState();
-  const [borderColor, setBorderColor] = useState("black");
   const router = useRouter();
   const productID = router.query;
+  const [getProducts, setGetProducts] = useState([]);
+  const [textID, setTextID] = useState(productID.variant_id);
+  const [borderColor, setBorderColor] = useState("black");
+
+console.log("productID",productID.variant_id)
+console.log("TextID",textID)
 
   const GetProducts = async () => {
     const response = await fetch("/api/shopify");
-
     const data = await response.json();
     setGetProducts(data);
   };
+
   useEffect(() => {
     GetProducts();
-  }, []);
+  }, [productID.variant_id]);
+
   const productData = getProducts.filter(
     (obj) => obj.id === parseInt(productID.id)
   );
+
   if (productData) {
     console.log("Match found:", productData);
   } else {
     console.log("No match found.");
   }
+
   const handleColorCircle = (id) => {
-    // console.log("handleColorCircle");
     setBorderColor("black");
-    // setCircleCount()
   };
 
   const handleText = (id) => {
-    // console.log("Text ID", id);
     setTextID(id);
   };
 
@@ -88,7 +91,7 @@ const Product = () => {
               : item.variants.map((vart) => (
                   <span key={vart.id}>
                     {vart.option2 === null ? (
-                      console.log("Null")
+                      console.log("Single Variant Project")
                     ) : (
                       <span>
                         {" "}
@@ -99,7 +102,7 @@ const Product = () => {
                 ))}
             {item.variants.length > 1
               ? item.variants.map((vart) => (
-                  <>
+                  <span key={vart.id}>
                     {vart.id === textID && (
                       <span key={vart.id}>
                         <p>Price: {vart.price}Rs</p>
@@ -108,7 +111,7 @@ const Product = () => {
                         <p>Manufacture Date: {vart.created_at.slice(0, 10)}</p>
                       </span>
                     )}{" "}
-                  </>
+                  </span>
                 ))
               : item.variants.map((vart) => (
                   <span key={vart.id}>
