@@ -40,7 +40,7 @@ function App() {
       setCheckBox([...checkBox, id]);
     }
   };
-  
+
 const checkboxStyle = {
     width: '15px',
     height: '15px',

@@ -9,7 +9,7 @@ const Product = () => {
   const [textID, setTextID] = useState(productID.variant_id);
   const [borderColor, setBorderColor] = useState("black");
 
-  console.log("productID", productID.variant_id);
+  console.log("VariantID", productID.variant_id);
   console.log("TextID", textID);
 
   const GetProducts = async () => {
@@ -22,8 +22,8 @@ const Product = () => {
     () => {
       GetProducts();
     },
-    [productID.variant_id],
-    textID
+    [productID.variant_id,textID],
+    
   );
 
   const productData = getProducts.filter(
@@ -91,10 +91,22 @@ const Product = () => {
                 />
               )
             ) : (
-              console.log("Here More Than One Variant Logic")
+                item.images.map((img) => {
+                  return (
+                    img.variant_ids[0] === textID && (
+                      <img
+                            key={img.variant_ids}
+                            src={img.src}
+                            alt="Product Image"
+                            widp={500}
+                            height={500}
+                          />
+                 )
+               )
+             })
             )}
           </div>
-          <div className="div-css  ">
+          <div className="div-css">
             <h1>{item.title}</h1>
             <p>Description: {item.body_html}</p>
             <p>Product Avaiablity: {item.status}</p>
