@@ -9,6 +9,7 @@ const Product = () => {
   const [textID, setTextID] = useState(productID.variant_id);
   const [borderColor, setBorderColor] = useState("black");
 
+  console.log("VariantID", productID);
   console.log("VariantID", productID.variant_id);
   console.log("TextID", textID);
 
@@ -38,6 +39,10 @@ const Product = () => {
   const handleColorCircle = (id) => {
     setBorderColor("black");
   };
+  useEffect(() => {
+    setTextID(productID.variant_id);
+  }
+  ,[productID])
 
   const handleText = (id) => {
     setTextID(id);
