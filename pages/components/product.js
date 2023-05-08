@@ -24,7 +24,6 @@ const Product = () => {
 //       let { product_ID } = router.query;
 //     }
 //   },[router.isReady])
-
 // console.log("Product_ID",product_ID)
 
   useEffect(() => {

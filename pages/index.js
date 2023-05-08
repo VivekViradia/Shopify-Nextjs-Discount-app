@@ -57,7 +57,7 @@ const checkboxStyle = {
               
             </Head>
           <h1>Product List</h1>
-          <div style={{ height: "500px", overflow: "auto" }}>
+          <div style={{ height: "1300px", overflow: "auto" }}>
           <table className="table" style={{border: "1px solid black"}}>
               <thead>
                 <tr>
@@ -109,12 +109,16 @@ const checkboxStyle = {
                         <th>{products.body_html}</th>
                       )}
 
+                      
+
                       {products.variants &&
                         products.variants.length > 0 &&
                         products?.variants?.map((vart, index) => (
                           <th key={index}>{vart?.price}</th>
                         ))}
 
+                      
+                 
                       <th>{products.vendor}</th>
                       <th>{products.created_at.slice(0, 10)}</th>
                       <th>{products.status}</th>
