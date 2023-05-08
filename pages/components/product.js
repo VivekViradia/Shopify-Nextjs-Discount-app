@@ -19,12 +19,9 @@ const Product = () => {
     setGetProducts(data);
   };
 
-  useEffect(
-    () => {
-      GetProducts();
-    },
-    [productID.variant_id,textID]
-  );
+  useEffect(() => {
+    GetProducts();
+  }, [productID.variant_id, textID]);
 
   const productData = getProducts.filter(
     (obj) => obj.id === parseInt(productID.id)
@@ -41,8 +38,7 @@ const Product = () => {
   };
   useEffect(() => {
     setTextID(productID.variant_id);
-  }
-  ,[productID])
+  }, [productID]);
 
   const handleText = (id) => {
     setTextID(id);
@@ -95,19 +91,19 @@ const Product = () => {
                 />
               )
             ) : (
-                item.images.map((img) => {
-                  return (
-                    img.variant_ids[0] === textID && (
-                      <img
-                            key={img.variant_ids}
-                            src={img.src}
-                            alt="Product Image"
-                            widp={500}
-                            height={500}
-                          />
-                 )
-               )
-             })
+              item.images.map((img) => {
+                return (
+                  img.variant_ids[0] === textID && (
+                    <img
+                      key={img.variant_ids}
+                      src={img.src}
+                      alt="Product Image"
+                      widp={500}
+                      height={500}
+                    />
+                  )
+                );
+              })
             )}
           </div>
           <div className="div-css">
