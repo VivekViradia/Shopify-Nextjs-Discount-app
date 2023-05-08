@@ -22,8 +22,7 @@ const Product = () => {
     () => {
       GetProducts();
     },
-    [productID.variant_id,textID],
-    
+    [productID.variant_id,textID]
   );
 
   const productData = getProducts.filter(
