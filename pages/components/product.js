@@ -110,7 +110,7 @@ const Product = () => {
                       key={img.variant_ids}
                       src={img.src}
                       alt="Product Image"
-                      widp={500}
+                      width={500}
                       height={500}
                     />
                   )
