@@ -9,6 +9,7 @@ function App() {
     async function fetchData() {
       const res = await fetch("http://localhost:3000/api/shopify");
       const data = await res.json();
+      console.log("data ", data)
       setGetProducts(data);
     }
 
@@ -18,7 +19,7 @@ function App() {
   return (
     <>
       <div className="product-grid" >
-        {getProducts.map((product, index) => (
+        {getProducts && getProducts.length > 0 && getProducts.map((product, index) => (
           <Product key={index} products={product} />
         ))}
       </div>

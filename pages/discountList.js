@@ -4,7 +4,7 @@ import Modal from "react-modal";
 
 const DiscountList = () => {
   const route = useRouter();
-  const ProductData = route.query
+  const ProductData = route.query;
   const [isOpen, setIsOpen] = useState(true);
 
   const customStyles = {
@@ -23,17 +23,16 @@ const DiscountList = () => {
 
   console.log("filterProductData", ProductData);
 
-    const handlePercentDiscount = () => {
-      route.push({
-        pathname: "/percentDiscount"
-        
-      });
-        setIsOpen(false);
-    };
+  const handlePercentDiscount = () => {
+    route.push({
+      pathname: "/percentDiscount",
+    });
+    setIsOpen(false);
+  };
 
   const handleFlatDiscount = () => {
     route.push({
-      pathname: "/flatDiscount"
+      pathname: "/flatDiscount",
     });
     setIsOpen(false);
   };

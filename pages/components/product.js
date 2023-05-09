@@ -7,7 +7,7 @@ const Product = () => {
   const productID = router.query;
   const [getProducts, setGetProducts] = useState([]);
   const [textID, setTextID] = useState(productID.variant_id);
-  const [borderColor, setBorderColor] = useState("black");
+  const [borderColor, setBorderColor] = useState("");
 
   console.log("VariantID", productID);
   console.log("VariantID", productID.variant_id);
@@ -19,12 +19,12 @@ const Product = () => {
     setGetProducts(data);
   };
 
-//   useEffect(() => {
-//     if (router.isReady) {
-//       let { product_ID } = router.query;
-//     }
-//   },[router.isReady])
-// console.log("Product_ID",product_ID)
+  //   useEffect(() => {
+  //     if (router.isReady) {
+  //       let { product_ID } = router.query;
+  //     }
+  //   },[router.isReady])
+  // console.log("Product_ID",product_ID)
 
   useEffect(() => {
     GetProducts();
@@ -55,6 +55,7 @@ const Product = () => {
     <div className="container">
       {productData.map((item) => (
         <div className="div-css row " key={item.id}>
+
           <div className="div-css ">
             {/* {item.variants.length >= 1 &&
               item.images.map((img) => (
@@ -98,9 +99,13 @@ const Product = () => {
                 />
               )
             ) : (
-              item.images.map((img) => {
+              item.images.map((img, index) => {
+                console.log("textID ck test ", textID, img, "item", item, borderColor)
+
+                // index === 0
+
                 return (
-                  img.variant_ids[0] === textID && (
+                  (!borderColor ? (index === 0) : (img.variant_ids[0] === textID)) && (
                     <img
                       key={img.variant_ids}
                       src={img.src}
@@ -121,47 +126,47 @@ const Product = () => {
             {item.variants.length > 1 ? <p>Colors Avaiable</p> : null}
             {item.variants && item.variants.length > 1
               ? item.variants.map((vart) => (
-                  <span
-                    key={vart.id}
-                    className="color-circle-row"
-                    onClick={() => handleText(vart.id)}
-                  >
-                    <ColorCircle
-                      color={vart.option2}
-                      borderColor={borderColor}
-                      onClick={() => handleColorCircle(vart.id)}
-                    />
-                  </span>
-                ))
+                <span
+                  key={vart.id}
+                  className="color-circle-row"
+                  onClick={() => handleText(vart.id)}
+                >
+                  <ColorCircle
+                    color={vart.option2}
+                    borderColor={borderColor}
+                    onClick={() => handleColorCircle(vart.id)}
+                  />
+                </span>
+              ))
               : item.variants.map((vart) => (
-                  <span key={vart.id}>
-                    {vart.option2 === null ? null : (
-                      <span>
-                        {" "}
-                        <ColorCircle color={vart.option2} />{" "}
-                      </span>
-                    )}
-                  </span>
-                ))}
+                <span key={vart.id}>
+                  {vart.option2 === null ? null : (
+                    <span>
+                      {" "}
+                      <ColorCircle color={vart.option2} />{" "}
+                    </span>
+                  )}
+                </span>
+              ))}
             {item.variants.length > 1
               ? item.variants.map((vart) => (
-                  <span key={vart.id}>
-                    {vart.id === textID && (
-                      <span key={vart.id}>
-                        <p>Price: {vart.price}Rs</p>
-                        <p>Color: {vart.option2}</p>
+                <span key={vart.id}>
+                  {vart.id === textID && (
+                    <span key={vart.id}>
+                      <p>Price: {vart.price}Rs</p>
+                      <p>Color: {vart.option2}</p>
 
-                        <p>Manufacture Date: {vart.created_at.slice(0, 10)}</p>
-                      </span>
-                    )}{" "}
-                  </span>
-                ))
+                      <p>Manufacture Date: {vart.created_at.slice(0, 10)}</p>
+                    </span>
+                  )}{" "}
+                </span>
+              ))
               : item.variants.map((vart) => (
-                  <span key={vart.id}>
-                    <p>Price: {vart.price}Rs</p>
-                    <p>Manufacture Date: {vart.created_at.slice(0, 10)}</p>
-                  </span>
-                ))}
+                <span key={vart.id}>
+                  <p>Price: {vart.price}Rs</p>
+                  <p>Manufacture Date: {vart.created_at.slice(0, 10)}</p>
+                </span>
+              ))}
           </div>
         </div>
       ))}
