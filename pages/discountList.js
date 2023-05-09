@@ -25,16 +25,15 @@ const DiscountList = () => {
 
     const handlePercentDiscount = () => {
       route.push({
-        pathname: "/percentDiscount",
-        query: {ProductData}
+        pathname: "/percentDiscount"
+        
       });
         setIsOpen(false);
     };
 
   const handleFlatDiscount = () => {
     route.push({
-      pathname: "/flatDiscount",
-      query: {ProductData}
+      pathname: "/flatDiscount"
     });
     setIsOpen(false);
   };

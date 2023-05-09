@@ -12,8 +12,7 @@ const Collection = ({ filterProductData, products }) => {
   const handleDiscount = () => {
     // router.push("/discountList");
     router.push({
-      pathname: "/discountList",
-      query: {productData},
+      pathname: "/discountList"
     });
   };
   useEffect(() => {
