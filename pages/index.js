@@ -109,13 +109,15 @@ const checkboxStyle = {
                         <th>{products.body_html}</th>
                       )}
 
-                      
+                      {
+                        <th>{products?.variants[0].price}</th>
+                      }
 
-                      {products.variants &&
+                      {/* {products.variants &&
                         products.variants.length > 0 &&
                         products?.variants?.map((vart, index) => (
                           <th key={index}>{vart?.price}</th>
-                        ))}
+                        ))} */}
 
                       
                  
