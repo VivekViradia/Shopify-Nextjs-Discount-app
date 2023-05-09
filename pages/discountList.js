@@ -24,12 +24,18 @@ const DiscountList = () => {
   console.log("filterProductData", ProductData);
 
     const handlePercentDiscount = () => {
-        route.push("/percentDiscount");
+      route.push({
+        pathname: "/percentDiscount",
+        query: {ProductData}
+      });
         setIsOpen(false);
     };
 
   const handleFlatDiscount = () => {
-    route.push("/flatDiscount");
+    route.push({
+      pathname: "/flatDiscount",
+      query: {ProductData}
+    });
     setIsOpen(false);
   };
 
