@@ -28,7 +28,7 @@ const Product = ({ products }) => {
       ) : (
         <img src="/No Image.jpg" alt="Product Image" widp={200} height={200} />
       )}
-      <h3>Name: {products?.handle}</h3>
+      <h3>Name: {products?.title}</h3>
       {!products?.body_html ? (
         <p>Description: Null</p>
       ) : (

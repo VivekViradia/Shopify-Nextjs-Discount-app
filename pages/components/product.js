@@ -55,7 +55,6 @@ const Product = () => {
     <div className="container">
       {productData.map((item) => (
         <div className="div-css row " key={item.id}>
-
           <div className="div-css ">
             {/* {item.variants.length >= 1 &&
               item.images.map((img) => (
