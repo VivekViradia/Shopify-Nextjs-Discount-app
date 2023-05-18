@@ -54,7 +54,6 @@ const checkboxStyle = {
           <>
             <Head>
               <link rel="icon" type="image/png" href="/icon2.png" />
-              
             </Head>
           <h1>Product List</h1>
           <div style={{ height: "1300px", overflow: "auto" }}>
