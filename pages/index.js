@@ -27,7 +27,11 @@ function App() {
   );
 
   const handleDiscountButton = () => {
-    router.push("/discountList");
+    // router.push("/discountList");
+    router.push({
+      pathname: '/discountList',
+      query:getProducts
+    })
   };
 
   const handleChange = (id) => {
