@@ -26,13 +26,12 @@ function Discount() {
     console.log("my query exits!!", query);
   }, [query]);
 
-  const handleOriginalPriceChange = (price) => {
-    setOriginalPrice(price);
+  const handleOriginalPriceChange = (event) => {
+    setOriginalPrice(event.target.value);
   };
 
   const handleDiscountPercentageChange = (event) => {
     setDiscountPercentage(event.target.value);
-    setOriginalPrice(event.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -48,6 +47,7 @@ function Discount() {
 
     // Set the final price state
     setFinalPrice(finalPrice);
+
     // Reset the form
     setOriginalPrice("");
     setDiscountPercentage("");
@@ -75,23 +75,22 @@ function Discount() {
         <form onSubmit={handleSubmit} key={product.id}>
           <p>Product:{product.title}</p>
 
-          <label htmlFor="originalPrice">Original Price:</label>
+          <label>Original Price:</label>
           {product?.variants.map((vart) => (
             <input
               type="number"
-              id="originalPrice"
-              defaultValue={vart.price}
+              value={vart.price}
+              onChange={handleOriginalPriceChange}
               key={vart.id}
             />
           ))}
-
+          {product?.variants.map((vart) => console.log(typeof vart.price))}
           <br />
           <br />
-          <label htmlFor="discountPercentage">Discount (%):</label>
+          <label>Discount (%):</label>
 
           <input
             type="number"
-            id="discountPercentage"
             value={discountPercentage}
             onChange={handleDiscountPercentageChange}
             required
