@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import Collection from "./collection";
 import Head from "next/head";
 
-
 function App() {
   const router = useRouter();
   const [getProducts, setGetProducts] = useState([]);
@@ -13,7 +12,7 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch('/api/shopify');
+      const res = await fetch("/api/shopify");
       const data = await res.json();
       setGetProducts(data);
     }
@@ -26,12 +25,12 @@ function App() {
     checkBox.find((abc) => item.id == abc)
   );
 
-  const handleDiscountButton = () => {
+  const handleDiscountButton = (id) => {
     // router.push("/discountList");
     router.push({
-      pathname: '/discountList',
-      query:getProducts
-    })
+      pathname: "/discountList",
+      query: id,
+    });
   };
 
   const handleChange = (id) => {
@@ -45,9 +44,9 @@ function App() {
     }
   };
 
-const checkboxStyle = {
-    width: '15px',
-    height: '15px',
+  const checkboxStyle = {
+    width: "15px",
+    height: "15px",
   };
 
   return (
@@ -55,13 +54,13 @@ const checkboxStyle = {
       {checked ? (
         <Collection filterProductData={filterProductData} products={checkBox} />
       ) : (
-          <>
-            <Head>
-              <link rel="icon" type="image/png" href="/icon2.png" />
-            </Head>
+        <>
+          <Head>
+            <link rel="icon" type="image/png" href="/icon2.png" />
+          </Head>
           <h1>Product List</h1>
           <div style={{ height: "1300px", overflow: "auto" }}>
-          <table className="table" style={{border: "1px solid black"}}>
+            <table className="table" style={{ border: "1px solid black" }}>
               <thead>
                 <tr>
                   <th></th>
@@ -79,7 +78,7 @@ const checkboxStyle = {
                   getProducts.length > 0 &&
                   getProducts.map((products, index) => (
                     <tr key={index}>
-                       <th>
+                      <th>
                         <input
                           style={checkboxStyle}
                           type="checkbox"
@@ -112,23 +111,14 @@ const checkboxStyle = {
                         <th>{products.body_html}</th>
                       )}
 
-                      {
-                        <th>{products?.variants[0].price}</th>
-                      }
-
-                      {/* {products.variants &&
-                        products.variants.length > 0 &&
-                        products?.variants?.map((vart, index) => (
-                          <th key={index}>{vart?.price}</th>
-                        ))} */}
-
-                      
-                 
+                      {<th>{products?.variants[0].price}</th>}
                       <th>{products.vendor}</th>
                       <th>{products.created_at.slice(0, 10)}</th>
                       <th>{products.status}</th>
                       <th>
-                        <button onClick={handleDiscountButton}>
+                        <button
+                          onClick={() => handleDiscountButton(products.id)}
+                        >
                           Add Discount
                         </button>
                       </th>

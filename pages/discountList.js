@@ -1,13 +1,12 @@
-import { useRouter } from 'next/router';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { useRouter } from "next/router";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 function Discount() {
   const router = useRouter();
-  const getProducts = router.query
-  
-  // console.log("getProSducts",router)
+  const {productID} = router.query;
 
+  console.log("getProSducts",productID)
 
   return (
     <Form>
@@ -30,6 +29,17 @@ function Discount() {
         Submit
       </Button> */}
       <h1>Discount Page</h1>
+      <table>
+        <tbody>
+          <tr>
+            <th>gfg </th>
+            <th>gfg</th>
+            <th>gfg</th>
+            <th>gfg</th>
+            <th>gfg</th>
+          </tr>
+        </tbody>
+      </table>
     </Form>
   );
 }
