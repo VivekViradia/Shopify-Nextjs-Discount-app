@@ -5,10 +5,10 @@ import Form from "react-bootstrap/Form";
 import React from "react";
 
 function Discount() {
-  const [originalPrice, setOriginalPrice] = useState('');
-  const [discountPercentage, setDiscountPercentage] = useState('');
+  const [originalPrice, setOriginalPrice] = useState("");
+  const [discountPercentage, setDiscountPercentage] = useState("");
   const [getProducts, setGetProducts] = useState([]);
-  const [finalPrice, setFinalPrice] = useState('');
+  const [finalPrice, setFinalPrice] = useState("");
 
   const useQuery = () => {
     const router = useRouter();
@@ -17,21 +17,22 @@ function Discount() {
     return router.query;
   };
 
-const query = useQuery()
+  const query = useQuery();
 
   useEffect(() => {
     if (!query) {
-      return
+      return;
     }
-    console.log("my query exits!!",query)
-  },[query])
+    console.log("my query exits!!", query);
+  }, [query]);
 
-  const handleOriginalPriceChange = (event) => {
-    setOriginalPrice(event.target.value);
+  const handleOriginalPriceChange = (price) => {
+    setOriginalPrice(price);
   };
 
   const handleDiscountPercentageChange = (event) => {
     setDiscountPercentage(event.target.value);
+    setOriginalPrice(event.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -42,13 +43,14 @@ const query = useQuery()
 
     // Calculate the final price after discount
     const finalPrice = price - (price * discount) / 100;
+    console.log("price", price);
+    console.log("discount", discount);
 
     // Set the final price state
-    setFinalPrice(finalPrice.toFixed(2));
-
+    setFinalPrice(finalPrice);
     // Reset the form
-    setOriginalPrice('');
-    setDiscountPercentage('');
+    setOriginalPrice("");
+    setDiscountPercentage("");
   };
 
   useEffect(() => {
@@ -62,42 +64,46 @@ const query = useQuery()
   }, []);
 
   const filterProductDataByID = getProducts.filter(
-    (obj) => obj.id === parseInt(productID.id)
+    (obj) => obj.id === parseInt(query["id"])
   );
-  
-console.log("kjsv",filterProductDataByID)
+
+  console.log("kjsv", filterProductDataByID);
 
   return (
-    // <form onSubmit={handleSubmit}>
-    //   <label htmlFor="originalPrice">Original Price:</label>
-    //   <input
-    //     type="number"
-    //     id="originalPrice"
-    //     value={originalPrice}
-    //     onChange={handleOriginalPriceChange}
-    //     required
-    //   />
+    <div>
+      {filterProductDataByID.map((product) => (
+        <form onSubmit={handleSubmit} key={product.id}>
+          <p>Product:{product.title}</p>
 
-    //   <label htmlFor="discountPercentage">Discount (%):</label>
-    //   <input
-    //     type="number"
-    //     id="discountPercentage"
-    //     value={discountPercentage}
-    //     onChange={handleDiscountPercentageChange}
-    //     required
-    //   />
+          <label htmlFor="originalPrice">Original Price:</label>
+          {product?.variants.map((vart) => (
+            <input
+              type="number"
+              id="originalPrice"
+              defaultValue={vart.price}
+              key={vart.id}
+            />
+          ))}
 
-    //   <button type="submit">Calculate Discount</button>
+          <br />
+          <br />
+          <label htmlFor="discountPercentage">Discount (%):</label>
 
-    //   {finalPrice && <p>Final Price: {finalPrice}</p>}
-    // </form>
-    // {
-    //   filterProductDataByID.map((products) => {
-    //     <>
-    //     </>
-    //   })
-    // }
-    <h1>df</h1>
+          <input
+            type="number"
+            id="discountPercentage"
+            value={discountPercentage}
+            onChange={handleDiscountPercentageChange}
+            required
+          />
+          <br />
+          <br />
+          <button type="submit">Calculate Discount</button>
+
+          {finalPrice && <p>Final Price: {finalPrice}</p>}
+        </form>
+      ))}
+    </div>
   );
 }
 

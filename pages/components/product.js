@@ -34,6 +34,8 @@ const Product = () => {
     (obj) => obj.id === parseInt(productID.id)
   );
 
+  console.log("Type ", typeof productData)
+
   if (productData) {
     console.log("Match found:", productData);
   } else {
