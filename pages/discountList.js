@@ -1,46 +1,103 @@
 import { useRouter } from "next/router";
+import { use, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import React from "react";
 
 function Discount() {
-  const router = useRouter();
-  const {productID} = router.query;
+  const [originalPrice, setOriginalPrice] = useState('');
+  const [discountPercentage, setDiscountPercentage] = useState('');
+  const [getProducts, setGetProducts] = useState([]);
+  const [finalPrice, setFinalPrice] = useState('');
 
-  console.log("getProSducts",productID)
+  const useQuery = () => {
+    const router = useRouter();
+    const ready = router.asPath != router.route;
+    if (!ready) return null;
+    return router.query;
+  };
+
+const query = useQuery()
+
+  useEffect(() => {
+    if (!query) {
+      return
+    }
+    console.log("my query exits!!",query)
+  },[query])
+
+  const handleOriginalPriceChange = (event) => {
+    setOriginalPrice(event.target.value);
+  };
+
+  const handleDiscountPercentageChange = (event) => {
+    setDiscountPercentage(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const price = parseFloat(originalPrice);
+    const discount = parseFloat(discountPercentage);
+
+    // Calculate the final price after discount
+    const finalPrice = price - (price * discount) / 100;
+
+    // Set the final price state
+    setFinalPrice(finalPrice.toFixed(2));
+
+    // Reset the form
+    setOriginalPrice('');
+    setDiscountPercentage('');
+  };
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch("/api/shopify");
+      const data = await res.json();
+      setGetProducts(data);
+    }
+
+    fetchData();
+  }, []);
+
+  const filterProductDataByID = getProducts.filter(
+    (obj) => obj.id === parseInt(productID.id)
+  );
+  
+console.log("kjsv",filterProductDataByID)
 
   return (
-    <Form>
-      {/* <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-      </Form.Group>
+    // <form onSubmit={handleSubmit}>
+    //   <label htmlFor="originalPrice">Original Price:</label>
+    //   <input
+    //     type="number"
+    //     id="originalPrice"
+    //     value={originalPrice}
+    //     onChange={handleOriginalPriceChange}
+    //     required
+    //   />
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button> */}
-      <h1>Discount Page</h1>
-      <table>
-        <tbody>
-          <tr>
-            <th>gfg </th>
-            <th>gfg</th>
-            <th>gfg</th>
-            <th>gfg</th>
-            <th>gfg</th>
-          </tr>
-        </tbody>
-      </table>
-    </Form>
+    //   <label htmlFor="discountPercentage">Discount (%):</label>
+    //   <input
+    //     type="number"
+    //     id="discountPercentage"
+    //     value={discountPercentage}
+    //     onChange={handleDiscountPercentageChange}
+    //     required
+    //   />
+
+    //   <button type="submit">Calculate Discount</button>
+
+    //   {finalPrice && <p>Final Price: {finalPrice}</p>}
+    // </form>
+    // {
+    //   filterProductDataByID.map((products) => {
+    //     <>
+    //     </>
+    //   })
+    // }
+    <h1>df</h1>
   );
 }
 

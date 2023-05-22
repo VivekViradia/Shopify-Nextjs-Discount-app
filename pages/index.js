@@ -29,7 +29,7 @@ function App() {
     // router.push("/discountList");
     router.push({
       pathname: "/discountList",
-      query: id,
+      query: {id},
     });
   };
 

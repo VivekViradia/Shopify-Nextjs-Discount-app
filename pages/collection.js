@@ -18,7 +18,7 @@ const Collection = ({ filterProductData, products }) => {
   useEffect(() => {
     setProductData(filterProductData);
   }, []);
-  console.log("ProductData", productData);
+  console.log("filterProductData", filterProductData);
 
   const handleCollectionCreate = () => {
     console.log("Collection Name", collectionName);
