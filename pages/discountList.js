@@ -5,10 +5,10 @@ import Form from "react-bootstrap/Form";
 import React from "react";
 
 function Discount() {
-  const [originalPrice, setOriginalPrice] = useState("");
-  const [discountPercentage, setDiscountPercentage] = useState("");
+  const [discount, setDiscount] = useState('');
+  const [finalPrice, setFinalPrice] = useState('');
   const [getProducts, setGetProducts] = useState([]);
-  const [finalPrice, setFinalPrice] = useState("");
+
 
   const useQuery = () => {
     const router = useRouter();
@@ -34,23 +34,18 @@ function Discount() {
     setDiscountPercentage(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleDiscountChange = (event) => {
+    setDiscount(event.target.value);
+  };
 
-    const price = parseFloat(originalPrice);
-    const discount = parseFloat(discountPercentage);
+  const applyDiscount = () => {
+    const price = parseFloat(product.variants[0].price);
+    const discountValue = parseFloat(discount);
 
-    // Calculate the final price after discount
-    const finalPrice = price - (price * discount) / 100;
-    console.log("price", price);
-    console.log("discount", discount);
-
-    // Set the final price state
-    setFinalPrice(finalPrice);
-
-    // Reset the form
-    setOriginalPrice("");
-    setDiscountPercentage("");
+    if (!isNaN(price) && !isNaN(discountValue)) {
+      const discountedPrice = price - (price * discountValue) / 100;
+      setFinalPrice(discountedPrice.toFixed(2));
+    }
   };
 
   useEffect(() => {
@@ -72,35 +67,27 @@ function Discount() {
   return (
     <div>
       {filterProductDataByID.map((product) => (
-        <form onSubmit={handleSubmit} key={product.id}>
-          <p>Product:{product.title}</p>
-
-          <label>Original Price:</label>
-          {product?.variants.map((vart) => (
-            <input
-              type="number"
-              value={vart.price}
-              onChange={handleOriginalPriceChange}
-              key={vart.id}
-            />
-          ))}
-          {product?.variants.map((vart) => console.log(typeof vart.price))}
-          <br />
-          <br />
-          <label>Discount (%):</label>
-
+        <div>
+        <h2>{product.title}</h2>
+        <p>{product.body_html}</p>
+        <p>Vendor: {product.vendor}</p>
+        <p>Price: {product.variants[0].price}</p>
+  
+        <div>
+          <label htmlFor="discount">Discount (%):</label>
           <input
             type="number"
-            value={discountPercentage}
-            onChange={handleDiscountPercentageChange}
-            required
+            id="discount"
+            value={discount}
+            onChange={handleDiscountChange}
           />
-          <br />
-          <br />
-          <button type="submit">Calculate Discount</button>
-
-          {finalPrice && <p>Final Price: {finalPrice}</p>}
-        </form>
+          <button onClick={applyDiscount}>Apply Discount</button>
+        </div>
+  
+        {finalPrice && <p>Final Price: {finalPrice}</p>}
+  
+        <img src={product.image.src} alt={product.title} />
+      </div>
       ))}
     </div>
   );
