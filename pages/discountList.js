@@ -1,18 +1,16 @@
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { use, useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import React from "react";
 
 function Discount() {
-  const [discount, setDiscount] = useState('');
-  const [finalPrice, setFinalPrice] = useState('');
+  const [discount, setDiscount] = useState("");
+  const [finalPrice, setFinalPrice] = useState("");
   const [getProducts, setGetProducts] = useState([]);
-
+  const [originalPrice, setOriginalPrice] = useState("");
+  const [discountPercentage, setDiscountPercentage] = useState("");
 
   const useQuery = () => {
     const router = useRouter();
-    const ready = router.asPath != router.route;
+    const ready = router.asPath !== router.route;
     if (!ready) return null;
     return router.query;
   };
@@ -23,22 +21,14 @@ function Discount() {
     if (!query) {
       return;
     }
-    console.log("my query exits!!", query);
+    console.log("my query exists!!", query);
   }, [query]);
-
-  const handleOriginalPriceChange = (event) => {
-    setOriginalPrice(event.target.value);
-  };
-
-  const handleDiscountPercentageChange = (event) => {
-    setDiscountPercentage(event.target.value);
-  };
 
   const handleDiscountChange = (event) => {
     setDiscount(event.target.value);
   };
 
-  const applyDiscount = () => {
+  const applyDiscount = (product) => {
     const price = parseFloat(product.variants[0].price);
     const discountValue = parseFloat(discount);
 
@@ -62,32 +52,47 @@ function Discount() {
     (obj) => obj.id === parseInt(query["id"])
   );
 
-  console.log("kjsv", filterProductDataByID);
+  console.log("filterProductDataByID", filterProductDataByID);
 
   return (
     <div>
       {filterProductDataByID.map((product) => (
-        <div>
-        <h2>{product.title}</h2>
-        <p>{product.body_html}</p>
-        <p>Vendor: {product.vendor}</p>
-        <p>Price: {product.variants[0].price}</p>
-  
-        <div>
-          <label htmlFor="discount">Discount (%):</label>
-          <input
-            type="number"
-            id="discount"
-            value={discount}
-            onChange={handleDiscountChange}
-          />
-          <button onClick={applyDiscount}>Apply Discount</button>
+        <div key={product.id}>
+          {product?.image && products?.image?.src ? (
+            <img
+              src={product.image.src}
+              alt="Product Image"
+              width={230}
+              height={230}
+            />
+          ) : (
+            <img
+              src="/No Image.jpg"
+              alt="Product Image"
+              width={230}
+              height={230}
+            />
+          )}
+          <h2>{product.title}</h2>
+          <p>{product.body_html}</p>
+          <p>Vendor: {product.vendor}</p>
+          <p>Price: {product.variants[0].price}</p>
+
+          <div>
+            <label htmlFor="discount">Discount (%):</label>
+            <input
+              type="number"
+              id="discount"
+              value={discount}
+              onChange={handleDiscountChange}
+            />
+            <button onClick={() => applyDiscount(product)}>Add Discount</button>
+          </div>
+
+          {finalPrice && <p>Final Price: {finalPrice}</p>}
+
+          {/* <img src={product.image.src} alt={product.title} /> */}
         </div>
-  
-        {finalPrice && <p>Final Price: {finalPrice}</p>}
-  
-        <img src={product.image.src} alt={product.title} />
-      </div>
       ))}
     </div>
   );
