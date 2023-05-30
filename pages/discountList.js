@@ -58,19 +58,19 @@ function Discount() {
     <div>
       {filterProductDataByID.map((product) => (
         <div key={product.id}>
-          {product?.image && products?.image?.src ? (
+          {product?.image && product?.image?.src ? (
             <img
               src={product.image.src}
               alt="Product Image"
-              width={230}
-              height={230}
+              width={225}
+              height={225}
             />
           ) : (
             <img
               src="/No Image.jpg"
               alt="Product Image"
-              width={230}
-              height={230}
+              width={225}
+              height={225}
             />
           )}
           <h2>{product.title}</h2>
@@ -90,8 +90,6 @@ function Discount() {
           </div>
 
           {finalPrice && <p>Final Price: {finalPrice}</p>}
-
-          {/* <img src={product.image.src} alt={product.title} /> */}
         </div>
       ))}
     </div>
